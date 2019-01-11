@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Px5-2q-6tB">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Grade Calculator -->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GradeCalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your name to get started" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34x-UA-Fy6">
+                                <rect key="frame" x="29.5" y="206" width="316.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. John" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p1b-TT-d3v">
+                                <rect key="frame" x="109" y="266" width="157" height="46"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="checkValidName:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="vvP-am-n0z"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XyX-n7-oBn">
+                                <rect key="frame" x="141.5" y="412" width="92" height="66"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <segue destination="ciz-aZ-VSc" kind="show" identifier="setUpSegue" id="TzE-v8-eTx"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid name." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rB7-3V-qkh">
+                                <rect key="frame" x="87.5" y="327" width="200" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="34x-UA-Fy6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="90" id="3ck-4g-Tgy"/>
+                            <constraint firstItem="p1b-TT-d3v" firstAttribute="top" secondItem="34x-UA-Fy6" secondAttribute="bottom" constant="30" id="D7Z-B0-1eA"/>
+                            <constraint firstItem="p1b-TT-d3v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GAA-u0-Bej"/>
+                            <constraint firstItem="rB7-3V-qkh" firstAttribute="top" secondItem="p1b-TT-d3v" secondAttribute="bottom" constant="15" id="KDv-0z-2e9"/>
+                            <constraint firstItem="rB7-3V-qkh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NRy-tj-J51"/>
+                            <constraint firstItem="XyX-n7-oBn" firstAttribute="top" secondItem="p1b-TT-d3v" secondAttribute="bottom" constant="100" id="Sbe-po-VZj"/>
+                            <constraint firstItem="34x-UA-Fy6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yeg-vF-79y"/>
+                            <constraint firstItem="XyX-n7-oBn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zpH-G0-5Jj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="473-Ym-KoV" appends="YES" id="Z2E-8U-NgG"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Grade Calculator " id="bah-1u-kht"/>
+                    <connections>
+                        <outlet property="errorLabel" destination="rB7-3V-qkh" id="C4s-DR-pGM"/>
+                        <outlet property="nameTextField" destination="p1b-TT-d3v" id="jAX-ye-vT7"/>
+                        <outlet property="startButton" destination="XyX-n7-oBn" id="jdc-fU-NjE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="473-Ym-KoV">
+                    <connections>
+                        <action selector="exitKeyboard:" destination="BYZ-38-t0r" id="Jzh-C8-et9"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1072.8" y="133.5832083958021"/>
+        </scene>
+        <!--My Courses-->
+        <scene sceneID="GyG-Mz-TKZ">
+            <objects>
+                <viewController title="My Courses" id="ciz-aZ-VSc" customClass="HomeScreenViewController" customModule="GradeCalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rJQ-ad-3ct">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="bO1-nb-PSU"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bfw-Ax-Fuj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1951" y="130"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jDH-4j-LzG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Px5-2q-6tB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Bcm-b8-WBo">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.14954516179999999" green="0.88149606449999995" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="KiM-cO-6E8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EZl-8i-8Yx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="204" y="134"/>
+        </scene>
+    </scenes>
+</document>
