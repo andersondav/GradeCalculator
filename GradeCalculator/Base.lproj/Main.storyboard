@@ -87,13 +87,62 @@
                     <view key="view" contentMode="scaleToFill" id="rJQ-ad-3ct">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fN9-5p-fx7">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeScreenCourseCell" rowHeight="100" id="WC6-I4-Qiz" customClass="HomeScreenCourseCell" customModule="GradeCalculator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WC6-I4-Qiz" id="wV3-0R-wyK">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fA8-XF-jyN">
+                                                    <rect key="frame" x="15" y="32" width="189" height="36"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%%%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcB-Zu-9oL">
+                                                    <rect key="frame" x="281.5" y="32" width="68.5" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="EcB-Zu-9oL" secondAttribute="trailing" constant="25" id="E7I-O5-rDw"/>
+                                                <constraint firstItem="fA8-XF-jyN" firstAttribute="leading" secondItem="wV3-0R-wyK" secondAttribute="leading" constant="15" id="ee1-br-O14"/>
+                                                <constraint firstItem="EcB-Zu-9oL" firstAttribute="centerY" secondItem="wV3-0R-wyK" secondAttribute="centerY" id="l5e-Wh-kDE"/>
+                                                <constraint firstItem="fA8-XF-jyN" firstAttribute="centerY" secondItem="wV3-0R-wyK" secondAttribute="centerY" id="ySi-DM-0wj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="courseNameLabel" destination="fA8-XF-jyN" id="gKY-P6-QFR"/>
+                                            <outlet property="percentageLabel" destination="EcB-Zu-9oL" id="4oM-Wi-x7n"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fN9-5p-fx7" firstAttribute="leading" secondItem="bO1-nb-PSU" secondAttribute="leading" id="BW0-Nn-KfU"/>
+                            <constraint firstItem="fN9-5p-fx7" firstAttribute="bottom" secondItem="bO1-nb-PSU" secondAttribute="bottom" id="FmY-7c-lgu"/>
+                            <constraint firstItem="fN9-5p-fx7" firstAttribute="top" secondItem="rJQ-ad-3ct" secondAttribute="top" id="Qzn-8s-0Hv"/>
+                            <constraint firstItem="fN9-5p-fx7" firstAttribute="trailing" secondItem="bO1-nb-PSU" secondAttribute="trailing" id="lWc-lb-LQV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bO1-nb-PSU"/>
                     </view>
+                    <connections>
+                        <outlet property="coursesTableView" destination="fN9-5p-fx7" id="ukp-QS-2JE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bfw-Ax-Fuj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1951" y="130"/>
+            <point key="canvasLocation" x="1949.5999999999999" y="129.98500749625188"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jDH-4j-LzG">

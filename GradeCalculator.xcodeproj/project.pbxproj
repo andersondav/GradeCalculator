@@ -13,6 +13,7 @@
 		714FC94321E91B0000080C2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 714FC94221E91B0000080C2A /* Assets.xcassets */; };
 		714FC94621E91B0000080C2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 714FC94421E91B0000080C2A /* LaunchScreen.storyboard */; };
 		714FC94E21E9212E00080C2A /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FC94D21E9212E00080C2A /* HomeScreenViewController.swift */; };
+		714FC95021EA7A1600080C2A /* HomeScreenCourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FC94F21EA7A1600080C2A /* HomeScreenCourseCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		714FC94521E91B0000080C2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		714FC94721E91B0000080C2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		714FC94D21E9212E00080C2A /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		714FC94F21EA7A1600080C2A /* HomeScreenCourseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCourseCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				714FC93B21E91AFC00080C2A /* AppDelegate.swift */,
 				714FC93D21E91AFC00080C2A /* ViewController.swift */,
 				714FC93F21E91AFC00080C2A /* Main.storyboard */,
+				714FC94F21EA7A1600080C2A /* HomeScreenCourseCell.swift */,
 				714FC94D21E9212E00080C2A /* HomeScreenViewController.swift */,
 				714FC94221E91B0000080C2A /* Assets.xcassets */,
 				714FC94421E91B0000080C2A /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				714FC93E21E91AFC00080C2A /* ViewController.swift in Sources */,
 				714FC93C21E91AFC00080C2A /* AppDelegate.swift in Sources */,
 				714FC94E21E9212E00080C2A /* HomeScreenViewController.swift in Sources */,
+				714FC95021EA7A1600080C2A /* HomeScreenCourseCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
