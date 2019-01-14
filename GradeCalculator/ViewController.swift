@@ -20,6 +20,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         nameTextField.adjustsFontSizeToFitWidth = false
+        
+        var placeHolder = NSMutableAttributedString()
+        let Name  = "e.g. John"
+        
+        // Set the Font
+        placeHolder = NSMutableAttributedString(string:Name, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 35.0)])
+        
+        // Set the color
+        placeHolder.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.lightGray, range:NSRange(location:0,length:Name.count))
+        
+        // Add attribute
+        nameTextField.attributedPlaceholder = placeHolder
     }
 
     @IBAction func exitKeyboard(_ sender: Any) {
@@ -32,9 +44,11 @@ class ViewController: UIViewController {
             if (name.contains(" ")) {
                 errorLabel.text = "Name must not include spaces."
                 errorLabel.textColor = UIColor.red
+                startButton.isEnabled = false
             } else if (name == "") {
                 errorLabel.text = "Please input a valid name."
                 errorLabel.textColor = UIColor.red
+                startButton.isEnabled = false
             } else {
                 username = name
                 startButton.isEnabled = true

@@ -14,7 +14,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var username = ""
     
-    var courses = [String:Int]()
+    var courses = [Course]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +23,15 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         self.title = "\(username)'s Courses"
         navigationItem.hidesBackButton = true
         
-        courses =
-            ["Calc 3": 97, "Spanish": 95]
+        //add an example course
+        courses.append(Course())
+        courses.append(Course())
         
         coursesTableView.dataSource = self
         coursesTableView.delegate = self
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
-        self.navigationItem.rightBarButtonItem = addButton
+        coursesTableView.reloadData()
+        
     }
     
 
@@ -43,6 +44,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         // Pass the selected object to the new view controller.
     }
     */
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return courses.count
     }
@@ -51,17 +53,31 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeScreenCourseCell") as! HomeScreenCourseCell
         
-        let courseName = Array(courses.keys)[indexPath.row]
+        //get the course name
+        let courseName = courses[indexPath.row].name
         cell.courseNameLabel?.text = courseName
         
-        if let percentage = courses[courseName] {
-            cell.percentageLabel?.text = "\(percentage)%"
+        //calculate grade
+        let assignments:[Assignment] = courses[indexPath.row].assignments
+        if assignments.count != 0 {
+            var total = 0.0, max = 0.0
+            for assignment in assignments {
+                total += assignment.score
+                max += assignment.max
+            }
+            
+            let percent = total / max * 100.0
+            cell.percentageLabel.text = String(format: "%.1f", percent) + "%"
         } else {
-            cell.percentageLabel?.text = "0%"
+            cell.percentageLabel.text = "--%"
         }
-    
+        
+        
         return cell
     }
     
+    @IBAction func unwindToHome(_ sender: UIStoryboardSegue) {
+        coursesTableView.reloadData()
+    }
     
 }
