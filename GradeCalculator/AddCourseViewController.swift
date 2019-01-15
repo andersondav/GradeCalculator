@@ -34,7 +34,8 @@ class AddCourseViewController: UIViewController {
         // Pass the selected object to the new view controller.
         
         let courseName = courseNameField.text
-        let toAdd = Course(name: courseName!, weights: ["All": 1.0], assignments: [Assignment()] )
+        let credits = Int(creditHourField.text!)!
+        let toAdd = Course(name: courseName!, weights: ["All": 1.0], assignments: [], credits: credits)
         
         if let dest = segue.destination as? HomeScreenViewController {
             dest.courses.append(toAdd)

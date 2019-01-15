@@ -123,6 +123,7 @@
                                         <connections>
                                             <outlet property="courseNameLabel" destination="fA8-XF-jyN" id="gKY-P6-QFR"/>
                                             <outlet property="percentageLabel" destination="EcB-Zu-9oL" id="4oM-Wi-x7n"/>
+                                            <segue destination="UPN-RD-2zb" kind="show" identifier="toCoursePage" id="CXP-7g-12H"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -319,6 +320,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZl-8i-8Yx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="204" y="134"/>
+        </scene>
+        <!--Course Name-->
+        <scene sceneID="86L-Ws-sKJ">
+            <objects>
+                <viewController id="UPN-RD-2zb" customClass="CoursePageViewController" customModule="GradeCalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J1A-tO-a2l">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="7hC-vh-Uec"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Course Name" id="xvM-v2-iLV">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="xzh-Cm-Yub"/>
+                            <barButtonItem systemItem="edit" id="ENR-ae-GDa"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Re3-bF-SYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1950" y="903"/>
         </scene>
     </scenes>
 </document>

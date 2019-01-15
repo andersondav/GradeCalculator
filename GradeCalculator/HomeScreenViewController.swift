@@ -35,15 +35,24 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "toCoursePage" {
+            print("in if")
+            if let dest = segue.destination as? CoursePageViewController {
+                let sendingCell = sender as? HomeScreenCourseCell
+                dest.courseName = (sendingCell?.courseNameLabel.text)!
+                dest.percentGrade = (sendingCell?.percentageLabel.text)!
+            }
+        }
+        
     }
-    */
+ 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return courses.count

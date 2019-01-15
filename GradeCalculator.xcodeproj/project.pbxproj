@@ -17,6 +17,7 @@
 		714FC95221EBC63F00080C2A /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FC95121EBC63F00080C2A /* AddCourseViewController.swift */; };
 		714FC95421EBED2500080C2A /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FC95321EBED2500080C2A /* Course.swift */; };
 		714FC95621EBED8600080C2A /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FC95521EBED8600080C2A /* Assignment.swift */; };
+		714FC95821EE55B300080C2A /* CoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FC95721EE55B300080C2A /* CoursePageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		714FC95121EBC63F00080C2A /* AddCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
 		714FC95321EBED2500080C2A /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		714FC95521EBED8600080C2A /* Assignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
+		714FC95721EE55B300080C2A /* CoursePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				714FC93B21E91AFC00080C2A /* AppDelegate.swift */,
 				714FC93D21E91AFC00080C2A /* ViewController.swift */,
 				714FC93F21E91AFC00080C2A /* Main.storyboard */,
+				714FC95721EE55B300080C2A /* CoursePageViewController.swift */,
 				714FC95321EBED2500080C2A /* Course.swift */,
 				714FC95521EBED8600080C2A /* Assignment.swift */,
 				714FC95121EBC63F00080C2A /* AddCourseViewController.swift */,
@@ -156,6 +159,7 @@
 				714FC93C21E91AFC00080C2A /* AppDelegate.swift in Sources */,
 				714FC95221EBC63F00080C2A /* AddCourseViewController.swift in Sources */,
 				714FC94E21E9212E00080C2A /* HomeScreenViewController.swift in Sources */,
+				714FC95821EE55B300080C2A /* CoursePageViewController.swift in Sources */,
 				714FC95021EA7A1600080C2A /* HomeScreenCourseCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
