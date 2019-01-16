@@ -24,8 +24,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         navigationItem.hidesBackButton = true
         
         //add an example course
-        courses.append(Course())
-        courses.append(Course())
+//        courses.append(Course())
+//        courses.append(Course())
         
         coursesTableView.dataSource = self
         coursesTableView.delegate = self
@@ -43,18 +43,34 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if segue.identifier == "toCoursePage" {
-            print("in if")
             if let dest = segue.destination as? CoursePageViewController {
                 let sendingCell = sender as? HomeScreenCourseCell
                 dest.courseName = (sendingCell?.courseNameLabel.text)!
                 dest.percentGrade = (sendingCell?.percentageLabel.text)!
+                
+                let index:IndexPath? = coursesTableView.indexPath(for: sendingCell!)
+                dest.course = courses[index!.row]
             }
         }
         
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if (identifier == "toCoursePage") {
+            let sendingCell = sender as? HomeScreenCourseCell
+            if (sendingCell?.percentageLabel.text == "") {
+                return false
+            }
+        }
+        return true
+    }
  
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (courses.count == 0) {
+            return 1
+        }
+        
         return courses.count
     }
     
@@ -62,9 +78,17 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeScreenCourseCell") as! HomeScreenCourseCell
         
+        if (courses.count == 0) {
+            cell.courseNameLabel.text = "Tap \"+\" to add courses"
+            cell.courseNameLabel.font = UIFont.systemFont(ofSize: cell.courseNameLabel.font.pointSize)
+            cell.percentageLabel.text = ""
+            return cell
+        }
+        
         //get the course name
         let courseName = courses[indexPath.row].name
         cell.courseNameLabel?.text = courseName
+        cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
         
         //calculate grade
         let assignments:[Assignment] = courses[indexPath.row].assignments
