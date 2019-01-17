@@ -10,10 +10,10 @@ import Foundation
 
 struct Assignment {
     
-    let name:String
-    let type:String
-    let score:Double
-    let max:Double
+    var name:String
+    var type:String
+    var score:Double
+    var max:Double
     
     init(name:String, type:String, score:Double, max:Double) {
         self.name = name

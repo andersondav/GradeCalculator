@@ -141,7 +141,7 @@
                     <navigationItem key="navigationItem" title="x's courses" id="bOu-f8-567">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="tgp-6r-zrm">
                             <connections>
-                                <segue destination="YO3-0y-DNN" kind="show" id="zSQ-qu-SVS"/>
+                                <segue destination="YO3-0y-DNN" kind="show" identifier="" id="zSQ-qu-SVS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -179,7 +179,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="checkInfo:" destination="YO3-0y-DNN" eventType="valueChanged" id="2R1-M2-ITj"/>
+                                    <action selector="checkInfo:" destination="YO3-0y-DNN" eventType="editingChanged" id="eTx-4n-M5b"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0T1-m2-hD6">
@@ -191,7 +191,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
-                                    <action selector="checkInfo:" destination="YO3-0y-DNN" eventType="editingDidEnd" id="cQf-Tt-k3z"/>
+                                    <action selector="checkInfo:" destination="YO3-0y-DNN" eventType="editingChanged" id="tsa-cR-Ow8"/>
                                 </connections>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="u2K-UL-rEY">
@@ -376,7 +376,7 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="xzh-Cm-Yub">
                                 <connections>
-                                    <segue destination="keC-Bi-pGZ" kind="show" identifier="toAddAssignment" id="Hfh-cF-rCU"/>
+                                    <segue destination="keC-Bi-pGZ" kind="show" identifier="toAddAssignment" id="H4P-Zs-ULa"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="edit" id="ENR-ae-GDa"/>
@@ -410,7 +410,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="checkInfo:" destination="YO3-0y-DNN" eventType="valueChanged" id="52b-et-EgF"/>
+                                    <action selector="validateForm:" destination="keC-Bi-pGZ" eventType="editingChanged" id="rh0-z2-bMh"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJd-Cn-RaX">
@@ -428,7 +428,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
-                                    <action selector="checkInfo:" destination="YO3-0y-DNN" eventType="editingDidEnd" id="aeH-0D-5ke"/>
+                                    <action selector="validateForm:" destination="keC-Bi-pGZ" eventType="editingChanged" id="EAo-rM-HcW"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Out of" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqY-e1-ed5">
@@ -446,7 +446,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
-                                    <action selector="checkInfo:" destination="YO3-0y-DNN" eventType="editingDidEnd" id="SZP-4j-Enx"/>
+                                    <action selector="validateForm:" destination="keC-Bi-pGZ" eventType="editingChanged" id="Bls-je-lqh"/>
+                                    <action selector="validateForm:" destination="keC-Bi-pGZ" eventType="valueChanged" id="yos-OK-CpW"/>
                                 </connections>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ig-WE-I58">
@@ -487,17 +488,31 @@
                             <constraint firstItem="j4h-lx-6jm" firstAttribute="leading" secondItem="JJy-3z-bf3" secondAttribute="leading" id="rUL-Yl-CZr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kJu-no-i3x"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="ulL-0u-KCO" appends="YES" id="Fvr-Ds-qXu"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Add Assignment" id="Z8D-xp-nNt">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Km0-oj-FCB"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="Km0-oj-FCB">
+                            <connections>
+                                <segue destination="8lB-mu-kgE" kind="unwind" identifier="unwindToCoursePage" unwindAction="unwindToCoursePageFor:towards:" id="Hjl-NY-ujr"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="categoryPicker" destination="5Ig-WE-I58" id="STi-Ob-r3Y"/>
                         <outlet property="nameField" destination="j4h-lx-6jm" id="YnD-RF-O9F"/>
                         <outlet property="outOfField" destination="2mS-uI-wn4" id="NCj-lc-muy"/>
                         <outlet property="scoreField" destination="yZe-BK-2Ra" id="3ye-Yu-LGU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IW2-RG-Osa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ulL-0u-KCO">
+                    <connections>
+                        <action selector="hideKeyboard:" destination="keC-Bi-pGZ" id="DOV-ZD-emU"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <exit id="8lB-mu-kgE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2777" y="903"/>
         </scene>

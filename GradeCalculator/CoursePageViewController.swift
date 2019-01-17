@@ -12,13 +12,13 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var courseName:String = ""
     var percentGrade:String = ""
-    var course:Course? = nil
+    var course:Course? = Course()
 
     @IBOutlet weak var assignmentsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("view loaded")
         // Do any additional setup after loading the view.
         self.title = courseName
         
@@ -34,7 +34,9 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        print("outside if statement")
         if segue.identifier == "toAddAssignment" {
+            print("here")
             if let dest = segue.destination as? AddAssignmentViewController {
                 dest.weights = course?.weights ?? ["All": 1.0]
             }
@@ -70,8 +72,10 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.percentageLabel.text = "\(score)/\(max)"
         
         return cell
-        
-        
+    }
+    
+    @IBAction func unwindToCoursePage(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
+        assignmentsTableView.reloadData()
     }
 
 }

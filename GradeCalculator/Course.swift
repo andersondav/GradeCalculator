@@ -10,10 +10,10 @@ import Foundation
 
 struct Course {
     
-    let name:String
-    let weights:[String:Double]
-    let assignments:[Assignment]
-    let credits:Int
+    var name:String
+    var weights:[String:Double]
+    var assignments:[Assignment]
+    var credits:Int
     
     init(name:String, weights:[String:Double], assignments:[Assignment], credits:Int) {
         self.name = name
