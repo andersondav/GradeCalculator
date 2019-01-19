@@ -263,7 +263,7 @@
                         <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="nzU-B2-hxX">
                             <connections>
                                 <action selector="unwindToHome:" destination="YO3-0y-DNN" id="fs3-pv-WY0"/>
-                                <segue destination="m13-tz-G19" kind="unwind" unwindAction="unwindToHome:" id="Y7l-Z6-uoz"/>
+                                <segue destination="m13-tz-G19" kind="unwind" identifier="coursePageToHome" unwindAction="unwindToHome:" id="Y7l-Z6-uoz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -373,6 +373,11 @@
                         <viewLayoutGuide key="safeArea" id="7hC-vh-Uec"/>
                     </view>
                     <navigationItem key="navigationItem" title="Course Name" id="xvM-v2-iLV">
+                        <barButtonItem key="leftBarButtonItem" title="Back to Courses" id="GwF-PP-8KE">
+                            <connections>
+                                <segue destination="KOl-QK-ene" kind="unwind" identifier="coursePageToHome" unwindAction="unwindToHome:" id="EYT-hk-AFZ"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="xzh-Cm-Yub">
                                 <connections>
@@ -387,6 +392,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Re3-bF-SYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="KOl-QK-ene" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1949.5999999999999" y="902.69865067466276"/>
         </scene>
@@ -420,9 +426,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yZe-BK-2Ra">
-                                <rect key="frame" x="310" y="283" width="50" height="46"/>
+                                <rect key="frame" x="270" y="283" width="90" height="46"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="nd1-Fo-gRm"/>
+                                    <constraint firstAttribute="width" constant="90" id="nd1-Fo-gRm"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
@@ -438,9 +444,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2mS-uI-wn4">
-                                <rect key="frame" x="310" y="349" width="50" height="46"/>
+                                <rect key="frame" x="270" y="349" width="90" height="46"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="lPq-sO-A97"/>
+                                    <constraint firstAttribute="width" constant="90" id="lPq-sO-A97"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
@@ -474,18 +480,20 @@
                             <constraint firstItem="iSP-Ul-5Uv" firstAttribute="top" secondItem="j4h-lx-6jm" secondAttribute="bottom" constant="170" id="OG1-oA-Yim"/>
                             <constraint firstItem="JJy-3z-bf3" firstAttribute="top" secondItem="kJu-no-i3x" secondAttribute="top" constant="30" id="SOt-mc-oVV"/>
                             <constraint firstItem="rqY-e1-ed5" firstAttribute="leading" secondItem="kJu-no-i3x" secondAttribute="leading" constant="15" id="XtR-JK-LFU"/>
-                            <constraint firstItem="JJy-3z-bf3" firstAttribute="leading" secondItem="kJu-no-i3x" secondAttribute="leading" constant="15" id="ao1-Ty-A7c"/>
+                            <constraint firstItem="yZe-BK-2Ra" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kJd-Cn-RaX" secondAttribute="trailing" constant="8" symbolic="YES" id="Ymr-tE-Mqg"/>
+                            <constraint firstItem="JJy-3z-bf3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kJu-no-i3x" secondAttribute="leading" id="ao1-Ty-A7c"/>
                             <constraint firstItem="j4h-lx-6jm" firstAttribute="centerX" secondItem="HGe-sf-47i" secondAttribute="centerX" id="bL4-46-0kw"/>
                             <constraint firstItem="2mS-uI-wn4" firstAttribute="centerY" secondItem="rqY-e1-ed5" secondAttribute="centerY" id="bS1-8Y-UUG"/>
                             <constraint firstItem="kJd-Cn-RaX" firstAttribute="top" secondItem="j4h-lx-6jm" secondAttribute="bottom" constant="40" id="bqE-F5-20v"/>
-                            <constraint firstItem="kJu-no-i3x" firstAttribute="trailing" secondItem="JJy-3z-bf3" secondAttribute="trailing" constant="15" id="db7-0e-J9V"/>
+                            <constraint firstItem="kJu-no-i3x" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JJy-3z-bf3" secondAttribute="trailing" id="db7-0e-J9V"/>
                             <constraint firstItem="j4h-lx-6jm" firstAttribute="top" secondItem="JJy-3z-bf3" secondAttribute="bottom" constant="15" id="eLP-CD-wnJ"/>
                             <constraint firstItem="yZe-BK-2Ra" firstAttribute="centerY" secondItem="kJd-Cn-RaX" secondAttribute="centerY" id="gTo-vg-NDk"/>
                             <constraint firstItem="yZe-BK-2Ra" firstAttribute="top" secondItem="j4h-lx-6jm" secondAttribute="bottom" constant="40" id="iyO-pA-e7Y"/>
                             <constraint firstItem="kJd-Cn-RaX" firstAttribute="leading" secondItem="kJu-no-i3x" secondAttribute="leading" constant="15" id="kCy-Gv-y4V"/>
                             <constraint firstItem="kJu-no-i3x" firstAttribute="trailing" secondItem="5Ig-WE-I58" secondAttribute="trailing" constant="10" id="l8R-hv-e8g"/>
                             <constraint firstItem="kJu-no-i3x" firstAttribute="trailing" secondItem="yZe-BK-2Ra" secondAttribute="trailing" constant="15" id="pRO-yQ-eSh"/>
-                            <constraint firstItem="j4h-lx-6jm" firstAttribute="leading" secondItem="JJy-3z-bf3" secondAttribute="leading" id="rUL-Yl-CZr"/>
+                            <constraint firstItem="2mS-uI-wn4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rqY-e1-ed5" secondAttribute="trailing" constant="8" symbolic="YES" id="r1l-Pw-jvz"/>
+                            <constraint firstItem="j4h-lx-6jm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JJy-3z-bf3" secondAttribute="leading" id="rUL-Yl-CZr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kJu-no-i3x"/>
                         <connections>
@@ -514,7 +522,7 @@
                 </tapGestureRecognizer>
                 <exit id="8lB-mu-kgE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2777" y="903"/>
+            <point key="canvasLocation" x="2776.8000000000002" y="902.69865067466276"/>
         </scene>
     </scenes>
 </document>

@@ -13,6 +13,7 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
     var courseName:String = ""
     var percentGrade:String = ""
     var course:Course? = Course()
+    var index:Int = 0
 
     @IBOutlet weak var assignmentsTableView: UITableView!
     
@@ -24,6 +25,8 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
         
         assignmentsTableView.dataSource = self
         assignmentsTableView.delegate = self
+        
+        navigationItem.hidesBackButton = true
     }
     
 
@@ -39,6 +42,13 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
             print("here")
             if let dest = segue.destination as? AddAssignmentViewController {
                 dest.weights = course?.weights ?? ["All": 1.0]
+            }
+        }
+        
+        if segue.identifier == "coursePageToHome" {
+            print("in the second if")
+            if let dest = segue.destination as? HomeScreenViewController {
+                dest.courses[index].assignments = (self.course?.assignments)!
             }
         }
     }

@@ -50,6 +50,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 let index:IndexPath? = coursesTableView.indexPath(for: sendingCell!)
                 dest.course = courses[index!.row]
+                dest.index = index!.row
             }
         }
         
