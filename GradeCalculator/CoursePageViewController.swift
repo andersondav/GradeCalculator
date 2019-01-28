@@ -37,16 +37,19 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        print("outside if statement")
+        //print("outside if statement")
         if segue.identifier == "toAddAssignment" {
-            print("here")
+            //print("here")
             if let dest = segue.destination as? AddAssignmentViewController {
                 dest.weights = course?.weights ?? ["All": 1.0]
             }
+//            let sendingCell = sender as! HomeScreenCourseCell
+//            let index = assignmentsTableView.indexPath(for: sendingCell)
+//            assignmentsTableView.deselectRow(at: index!, animated: true)
         }
         
         if segue.identifier == "coursePageToHome" {
-            print("in the second if")
+            //print("in the second if")
             if let dest = segue.destination as? HomeScreenViewController {
                 dest.courses[index].assignments = (self.course?.assignments)!
             }
@@ -66,8 +69,10 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "AssignmentCell") as! HomeScreenCourseCell
+        assignmentsTableView.allowsSelection = true
         
         if (course?.assignments.count == 0) {
+            assignmentsTableView.allowsSelection = false
             cell.courseNameLabel.text = "Tap \"+\" to add assignments"
             cell.courseNameLabel.font = UIFont.systemFont(ofSize: cell.courseNameLabel.font.pointSize)
             cell.percentageLabel.text = ""
