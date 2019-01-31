@@ -56,7 +56,6 @@
 		714FC92F21E91AFB00080C2A = {
 			isa = PBXGroup;
 			children = (
-				71DB2D83220258D1009CDC11 /* SettingsViewController.swift */,
 				714FC93A21E91AFC00080C2A /* GradeCalculator */,
 				714FC93921E91AFC00080C2A /* Products */,
 			);
@@ -73,6 +72,7 @@
 		714FC93A21E91AFC00080C2A /* GradeCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				71DB2D83220258D1009CDC11 /* SettingsViewController.swift */,
 				714FC93B21E91AFC00080C2A /* AppDelegate.swift */,
 				714FC93D21E91AFC00080C2A /* ViewController.swift */,
 				714FC93F21E91AFC00080C2A /* Main.storyboard */,
