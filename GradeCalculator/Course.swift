@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Course {
+struct Course:Codable {
     
     var name:String
     var weights:[String:Double]

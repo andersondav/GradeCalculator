@@ -15,46 +15,61 @@ class AddCourseViewController: UIViewController {
     @IBOutlet weak var gradeSystemControl: UISegmentedControl!
     @IBOutlet weak var setWeightsButton: UIButton!
     
-    var weights = [String:Double]()
+    //var weights = [String:Double]()
+    var myCourses:[Course] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if let data = UserDefaults.standard.value(forKey:"myCourses") as? Data {
+            myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data)
+        }
+        
         setWeightsButton.isEnabled = false
         
         creditHourField.adjustsFontSizeToFitWidth = false
         
     }
     
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+
         if (segue.identifier == "coursePageToHome") {
+            
             let courseName = courseNameField.text
             let credits = Int(creditHourField.text!)!
             var toAdd = Course(name: courseName!, weights: ["All": 1.0], assignments: [], credits: credits)
             
-            if (self.weights.count != 0) {
-                toAdd = Course(name: courseName!, weights: self.weights, assignments: [], credits: credits)
-            }
             
             if let dest = segue.destination as? HomeScreenViewController {
-                dest.courses.append(toAdd)
-        }
-        
-        }
-        
-        if (segue.identifier == "toSetWeights") {
-            if let dest = segue.destination as? SetWeightsViewController {
-                dest.weights = self.weights
+                myCourses.append(toAdd)
+                
+                UserDefaults.standard.set(try? PropertyListEncoder().encode(myCourses), forKey: "myCourses")
+                print("saved courses")
+                
+                let data = UserDefaults.standard.value(forKey: "myCourses") as? Data ?? nil
+                
+                if (data == nil) {
+                    print("stored nil")
+                }
+                
+                if (data != nil) {
+                    dest.courses = try! PropertyListDecoder().decode(Array<Course>.self, from: data!)
+                } else {
+                    dest.courses = []
+                }
+                
+                print(dest.courses)
+                
+                dest.coursesTableView.reloadData()
             }
+        
         }
+        
+//        if (segue.identifier == "toSetWeights") {
+//            if let dest = segue.destination as? SetWeightsViewController {
+//                dest.weights = self.weights
+//            }
+//        }
         
     }
  

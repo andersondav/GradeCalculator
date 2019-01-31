@@ -14,14 +14,23 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
     var percentGrade:String = ""
     var course:Course? = Course()
     var index:Int = 0
+    var myCourses:[Course] = []
 
     @IBOutlet weak var assignmentsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("view loaded")
-        // Do any additional setup after loading the view.
-        self.title = courseName
+        
+        let data = UserDefaults.standard.value(forKey: "myCourses") as? Data ?? nil
+        
+        if (data != nil) {
+            myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data!)
+        } else {
+            myCourses = []
+        }
+        
+        self.course = myCourses[index]
+        self.title = myCourses[index].name
         
         assignmentsTableView.dataSource = self
         assignmentsTableView.delegate = self
@@ -29,29 +38,24 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
         navigationItem.hidesBackButton = true
     }
     
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        //print("outside if statement")
         if segue.identifier == "toAddAssignment" {
             //print("here")
             if let dest = segue.destination as? AddAssignmentViewController {
-                dest.weights = course?.weights ?? ["All": 1.0]
+                dest.index = self.index
             }
-//            let sendingCell = sender as! HomeScreenCourseCell
-//            let index = assignmentsTableView.indexPath(for: sendingCell)
-//            assignmentsTableView.deselectRow(at: index!, animated: true)
         }
         
         if segue.identifier == "coursePageToHome" {
             //print("in the second if")
             if let dest = segue.destination as? HomeScreenViewController {
-                dest.courses[index].assignments = (self.course?.assignments)!
+                UserDefaults.standard.set(try? PropertyListEncoder().encode(myCourses), forKey: "myCourses")
+                
+                if let data = UserDefaults.standard.value(forKey:"myCourses") as? Data {
+                    dest.courses = try! PropertyListDecoder().decode(Array<Course>.self, from: data)
+                }
+                
+                dest.coursesTableView.reloadData()
             }
         }
     }

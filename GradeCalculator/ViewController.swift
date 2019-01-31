@@ -33,6 +33,17 @@ class ViewController: UIViewController {
         // Add attribute
         nameTextField.attributedPlaceholder = placeHolder
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let username = UserDefaults.standard.object(forKey: "username") as? String {
+            if (username == "") {
+                print("empty string")
+            } else {
+                performSegue(withIdentifier: "setUpSegue", sender: self)
+            }
+            
+        }
+    }
 
     @IBAction func exitKeyboard(_ sender: Any) {
         view.endEditing(true)
@@ -61,13 +72,25 @@ class ViewController: UIViewController {
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "setUpSegue" {
-            if let dest = segue.destination as? HomeScreenViewController {
-                dest.username = username
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "setUpSegue" {
+//            if let dest = segue.destination as? HomeScreenViewController {
+//                //dest.username = username
+//                UserDefaults.standard.set(self.username , forKey: "username")
+//            }
+//        }
+//    }
     
+    @IBAction func login(_ sender: Any) {
+        
+        UserDefaults.standard.set(self.username, forKey: "username")
+        
+        var courses:[Course] = []
+        
+        UserDefaults.standard.set(courses, forKey: "myCourses")
+        
+        self.performSegue(withIdentifier: "setUpSegue", sender: self)
+        
+    }
 }
 

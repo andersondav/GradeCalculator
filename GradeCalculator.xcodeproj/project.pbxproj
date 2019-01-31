@@ -20,6 +20,7 @@
 		714FC95821EE55B300080C2A /* CoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FC95721EE55B300080C2A /* CoursePageViewController.swift */; };
 		714FC95A21EE98AD00080C2A /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FC95921EE98AD00080C2A /* AddAssignmentViewController.swift */; };
 		71DB2D7C21FE6EB9009CDC11 /* SetWeightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DB2D7B21FE6EB9009CDC11 /* SetWeightsViewController.swift */; };
+		71DB2D84220258D1009CDC11 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DB2D83220258D1009CDC11 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		714FC95721EE55B300080C2A /* CoursePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePageViewController.swift; sourceTree = "<group>"; };
 		714FC95921EE98AD00080C2A /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
 		71DB2D7B21FE6EB9009CDC11 /* SetWeightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetWeightsViewController.swift; sourceTree = "<group>"; };
+		71DB2D83220258D1009CDC11 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		714FC92F21E91AFB00080C2A = {
 			isa = PBXGroup;
 			children = (
+				71DB2D83220258D1009CDC11 /* SettingsViewController.swift */,
 				714FC93A21E91AFC00080C2A /* GradeCalculator */,
 				714FC93921E91AFC00080C2A /* Products */,
 			);
@@ -161,6 +164,7 @@
 			files = (
 				714FC95421EBED2500080C2A /* Course.swift in Sources */,
 				714FC95621EBED8600080C2A /* Assignment.swift in Sources */,
+				71DB2D84220258D1009CDC11 /* SettingsViewController.swift in Sources */,
 				714FC93E21E91AFC00080C2A /* ViewController.swift in Sources */,
 				714FC93C21E91AFC00080C2A /* AppDelegate.swift in Sources */,
 				714FC95221EBC63F00080C2A /* AddCourseViewController.swift in Sources */,

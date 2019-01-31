@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Assignment {
+struct Assignment:Codable {
     
     var name:String
     var type:String

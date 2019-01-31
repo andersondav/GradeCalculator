@@ -12,6 +12,8 @@ class AddAssignmentViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     var weights = [String:Double]()
     var assignmentWeights:[String] = [String]()
+    var index:Int = 0
+    var myCourses:[Course] = []
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var scoreField: UITextField!
@@ -20,8 +22,18 @@ class AddAssignmentViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let data = UserDefaults.standard.value(forKey: "myCourses") as? Data ?? nil
+        
+        if (data != nil) {
+            myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data!)
+        } else {
+            myCourses = []
+        }
+        
+        let currentCourse = myCourses[index]
+        weights = currentCourse.weights
+        
         scoreField.adjustsFontSizeToFitWidth = false
         outOfField.adjustsFontSizeToFitWidth = false
         
@@ -77,26 +89,32 @@ class AddAssignmentViewController: UIViewController, UIPickerViewDelegate, UIPic
         view.endEditing(true)
     }
     
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
         let name = nameField.text
         let score = Double(scoreField.text!)
         let outOf = Double(outOfField.text!)
         let type = assignmentWeights[categoryPicker.selectedRow(inComponent: 0)]
-        
+
         let toAdd = Assignment(name: name!, type: type, score: score!, max: outOf!)
         
-        if (segue.identifier == "unwindToCoursePage") {
-            if let dest = segue.destination as? CoursePageViewController {
-                dest.course?.assignments.append(toAdd)
+        myCourses[index].assignments.append(toAdd)
+        
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(myCourses), forKey: "myCourses")
+        
+        if let dest = segue.destination as? CoursePageViewController {
+            let data = UserDefaults.standard.value(forKey: "myCourses") as? Data ?? nil
+            
+            if (data != nil) {
+                dest.myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data!)
+            } else {
+                dest.myCourses = []
             }
+            
+            dest.course = dest.myCourses[index]
+            dest.assignmentsTableView.reloadData()
         }
+        
     }
  
 

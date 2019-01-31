@@ -19,6 +19,16 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        username = UserDefaults.standard.object(forKey: "username") as! String
+        
+        let data = UserDefaults.standard.value(forKey: "myCourses") as? Data ?? nil
+        
+        if (data != nil) {
+            courses = try! PropertyListDecoder().decode(Array<Course>.self, from: data!)
+        } else {
+            courses = []
+        }
+        
         // Do any additional setup after loading the view.
         self.title = "\(username)'s Courses"
         navigationItem.hidesBackButton = true
@@ -32,6 +42,11 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         coursesTableView.reloadData()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        username = UserDefaults.standard.object(forKey: "username") as! String
+        self.title = "\(username)'s Courses"
     }
     
 
@@ -50,7 +65,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 let index:IndexPath = coursesTableView.indexPath(for: sendingCell!)!
                 coursesTableView.deselectRow(at: index, animated: true)
-                dest.course = courses[index.row]
+                //dest.course = courses[index.row]
                 dest.index = index.row
             }
         }
