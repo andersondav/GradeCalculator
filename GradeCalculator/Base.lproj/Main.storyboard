@@ -312,6 +312,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Displayed weights" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2p-Jw-OiL">
+                                <rect key="frame" x="16" y="443" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -319,6 +325,7 @@
                             <constraint firstItem="TYb-ed-k9X" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0C7-i3-Esp" secondAttribute="trailing" symbolic="YES" id="8Xe-Rj-g9b"/>
                             <constraint firstItem="u2K-UL-rEY" firstAttribute="leading" secondItem="TYb-ed-k9X" secondAttribute="leading" constant="15" id="AQr-ik-3sb"/>
                             <constraint firstItem="ALA-7d-Vjg" firstAttribute="top" secondItem="u2K-UL-rEY" secondAttribute="bottom" constant="140" id="FHM-GM-OBe"/>
+                            <constraint firstItem="c2p-Jw-OiL" firstAttribute="top" secondItem="u2K-UL-rEY" secondAttribute="bottom" constant="8" id="HLM-ic-uQh"/>
                             <constraint firstItem="XO9-bp-i0r" firstAttribute="centerX" secondItem="Ts5-C1-nEQ" secondAttribute="centerX" id="Kd5-6J-AQK"/>
                             <constraint firstItem="jdc-vR-lpj" firstAttribute="top" secondItem="78C-Pr-L6G" secondAttribute="bottom" constant="15" id="LBp-Eo-ZIm"/>
                             <constraint firstItem="gQh-St-UYv" firstAttribute="top" secondItem="0C7-i3-Esp" secondAttribute="bottom" constant="30" id="N40-N5-ryE"/>
@@ -334,7 +341,9 @@
                             <constraint firstItem="jdc-vR-lpj" firstAttribute="leading" secondItem="78C-Pr-L6G" secondAttribute="leading" id="o63-9T-IX1"/>
                             <constraint firstItem="0C7-i3-Esp" firstAttribute="leading" secondItem="78C-Pr-L6G" secondAttribute="leading" id="rLq-Vp-I8J"/>
                             <constraint firstItem="TYb-ed-k9X" firstAttribute="trailing" secondItem="u2K-UL-rEY" secondAttribute="trailing" constant="15" id="u12-da-wKs"/>
+                            <constraint firstItem="TYb-ed-k9X" firstAttribute="trailing" secondItem="c2p-Jw-OiL" secondAttribute="trailing" constant="16" id="vuZ-4X-mFQ"/>
                             <constraint firstItem="ALA-7d-Vjg" firstAttribute="leading" secondItem="TYb-ed-k9X" secondAttribute="leading" constant="15" id="w0R-ta-Epm"/>
+                            <constraint firstItem="c2p-Jw-OiL" firstAttribute="leading" secondItem="TYb-ed-k9X" secondAttribute="leading" constant="16" id="yJA-W6-ONZ"/>
                             <constraint firstItem="78C-Pr-L6G" firstAttribute="top" secondItem="TYb-ed-k9X" secondAttribute="top" constant="30" id="zVg-W1-2Eg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TYb-ed-k9X"/>
@@ -351,6 +360,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="chosenWeightsLabel" destination="c2p-Jw-OiL" id="hlx-MM-ev6"/>
                         <outlet property="courseNameField" destination="jdc-vR-lpj" id="hiZ-bq-PZi"/>
                         <outlet property="creditHourField" destination="0T1-m2-hD6" id="n4i-ic-xBL"/>
                         <outlet property="gradeSystemControl" destination="u2K-UL-rEY" id="eIi-sT-lOJ"/>
@@ -494,7 +504,11 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Set Weights" id="U8V-az-ne3">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="NeD-4B-ryH"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="NeD-4B-ryH">
+                            <connections>
+                                <segue destination="y7W-L6-cPz" kind="unwind" identifier="unwindToAddPage" unwindAction="unwindToAddPageFor:towards:" id="2fn-dQ-twB"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addWeightButton" destination="RqY-pe-8rU" id="pZ5-3c-Rc6"/>
@@ -504,6 +518,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J8N-F3-kXs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="y7W-L6-cPz" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="tsb-US-oz2">
                     <connections>
                         <action selector="exitKeyboard:" destination="hC9-Wh-SZR" id="vpE-O8-TOI"/>

@@ -20,7 +20,7 @@ class SetWeightsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         weightsTable.delegate = self
         weightsTable.dataSource = self
@@ -29,16 +29,15 @@ class SetWeightsViewController: UIViewController, UITableViewDelegate, UITableVi
         weightsTable.allowsSelection = false
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "unwindToAddPage" {
+            if let dest = segue.destination as? AddCourseViewController {
+                dest.weights = self.weights
+            }
+            
+        }
     }
-    */
+ 
     @IBAction func exitKeyboard(_ sender: Any) {
         view.endEditing(true)
     }

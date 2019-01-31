@@ -14,9 +14,11 @@ class AddCourseViewController: UIViewController {
     @IBOutlet weak var creditHourField: UITextField!
     @IBOutlet weak var gradeSystemControl: UISegmentedControl!
     @IBOutlet weak var setWeightsButton: UIButton!
+    @IBOutlet weak var chosenWeightsLabel: UILabel!
     
     //var weights = [String:Double]()
     var myCourses:[Course] = []
+    var weights:[String:Double] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,8 @@ class AddCourseViewController: UIViewController {
         setWeightsButton.isEnabled = false
         
         creditHourField.adjustsFontSizeToFitWidth = false
+        
+        chosenWeightsLabel.isHidden = true
         
     }
     
@@ -95,8 +99,38 @@ class AddCourseViewController: UIViewController {
     @IBAction func checkWeighting(_ sender: Any) {
         if gradeSystemControl.selectedSegmentIndex == 0 {
             setWeightsButton.isEnabled = false
+            chosenWeightsLabel.isHidden = true
+            weights = ["All": 1.0]
         } else {
             setWeightsButton.isEnabled = true
+            weights = [:]
+            if (weights.count == 0) {
+                chosenWeightsLabel.text = "Choose 'Set Weights' to set weights"
+            }
+            chosenWeightsLabel.isHidden = false
+            //display the chosen weights
+        }
+    }
+    
+    @IBAction func unwindToAddPage(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
+        if (gradeSystemControl.selectedSegmentIndex == 1) {
+            //display the chosen weights
+            if (weights.count == 0) {
+                chosenWeightsLabel.text = "Choose 'Set Weights' to set weights"
+            } else {
+                var weightsString = ""
+                
+                for key in weights.keys {
+                    var percentage = String(format: "%.1f", weights[key]! * 100.0)
+                    weightsString += "\(key) - \(percentage)%   "
+                }
+                
+                chosenWeightsLabel.text = weightsString
+            }
+            
+            chosenWeightsLabel.isHidden = false
+        } else {
+            chosenWeightsLabel.isHidden = true
         }
     }
 }

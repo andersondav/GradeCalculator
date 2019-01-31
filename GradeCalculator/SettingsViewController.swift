@@ -58,7 +58,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func clearData(_ sender: Any) {
-        let clearMessage = "Are you sure you want to clear all app data? All entered information will be lost and you will be returned to the login screen."
+        let clearMessage = "Are you sure you want to clear all app data? All entered information will be lost and you will be returned to the login screen. This action cannot be undone."
         var clearAlert = UIAlertController(title: "Clear Data", message: clearMessage, preferredStyle: UIAlertController.Style.alert)
         
         clearAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction)
