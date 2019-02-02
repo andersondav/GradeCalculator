@@ -96,5 +96,28 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func unwindToCoursePage(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
         assignmentsTableView.reloadData()
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle:UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            print("Deleted")
+            
+            if (myCourses[index].assignments.count == 1) {
+                myCourses[index].assignments = []
+                course = myCourses[index]
+                assignmentsTableView.reloadData()
+            } else {
+                myCourses[index].assignments.remove(at: indexPath.row)
+                course = myCourses[index]
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
+            
+            let data = try? PropertyListEncoder().encode(myCourses)
+            
+            UserDefaults.standard.set(data, forKey: "myCourses")
+        }
+        
+    }
 
 }

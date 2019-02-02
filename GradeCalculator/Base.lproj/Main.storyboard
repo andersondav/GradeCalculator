@@ -456,10 +456,11 @@
                                             <constraints>
                                                 <constraint firstItem="KSu-D0-tBp" firstAttribute="centerY" secondItem="opB-bG-tuu" secondAttribute="centerY" id="1Eq-x7-Lo8"/>
                                                 <constraint firstAttribute="trailing" secondItem="KSu-D0-tBp" secondAttribute="trailing" constant="15" id="Hiu-SO-eMT"/>
-                                                <constraint firstItem="opB-bG-tuu" firstAttribute="leading" secondItem="g5R-sE-mUT" secondAttribute="leading" constant="15" id="RED-G1-omE"/>
+                                                <constraint firstItem="opB-bG-tuu" firstAttribute="leading" secondItem="g5R-sE-mUT" secondAttribute="leading" constant="15" id="Lc5-Ki-WJf"/>
                                                 <constraint firstItem="opB-bG-tuu" firstAttribute="centerY" secondItem="g5R-sE-mUT" secondAttribute="centerY" id="w88-mu-BGE"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                         <connections>
                                             <outlet property="courseNameLabel" destination="opB-bG-tuu" id="0O2-4z-Jia"/>
                                             <outlet property="percentageLabel" destination="KSu-D0-tBp" id="xX8-E2-QmB"/>
@@ -513,6 +514,7 @@
                     <connections>
                         <outlet property="addWeightButton" destination="RqY-pe-8rU" id="pZ5-3c-Rc6"/>
                         <outlet property="categoryLabel" destination="cBm-Hv-pgf" id="MQh-Fk-m4Y"/>
+                        <outlet property="saveButton" destination="NeD-4B-ryH" id="jVR-So-GDu"/>
                         <outlet property="weightLabel" destination="JYm-s6-SUt" id="9Ba-g9-b7d"/>
                         <outlet property="weightsTable" destination="2Xf-eD-3BI" id="bpE-y2-bUL"/>
                     </connections>

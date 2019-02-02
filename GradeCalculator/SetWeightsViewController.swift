@@ -13,6 +13,7 @@ class SetWeightsViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var categoryLabel: UITextField!
     @IBOutlet weak var weightLabel: UITextField!
     @IBOutlet weak var addWeightButton: UIButton!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     @IBOutlet weak var weightsTable: UITableView!
     
@@ -27,6 +28,8 @@ class SetWeightsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         addWeightButton.isEnabled = false
         weightsTable.allowsSelection = false
+        
+        saveButton.isEnabled = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -52,6 +55,17 @@ class SetWeightsViewController: UIViewController, UITableViewDelegate, UITableVi
         print("about to reload data")
         
         weightsTable.reloadData()
+        
+        var sum = 0.0
+        for val in weights {
+            sum += val.value
+        }
+        
+        if sum != 1.0 {
+            saveButton.isEnabled = false
+        } else {
+            saveButton.isEnabled = true
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,4 +109,30 @@ class SetWeightsViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle:UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            print("Deleted")
+            
+            let sendingCell = weightsTable.cellForRow(at: indexPath) as! HomeScreenCourseCell
+            
+            self.weights.removeValue(forKey: sendingCell.courseNameLabel.text!)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            var sum = 0.0
+            for val in weights {
+                sum += val.value
+            }
+            
+            if sum != 1.0 {
+                saveButton.isEnabled = false
+            } else {
+                saveButton.isEnabled = true
+            }
+        }
+        
+    }
+    
+    
 }

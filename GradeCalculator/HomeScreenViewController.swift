@@ -67,6 +67,10 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 coursesTableView.deselectRow(at: index, animated: true)
                 //dest.course = courses[index.row]
                 dest.index = index.row
+                
+                if let data = UserDefaults.standard.value(forKey: "myCourses") {
+                    dest.myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data as! Data)
+                }
             }
         }
         
@@ -111,19 +115,66 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
         
         //calculate grade
-        let assignments:[Assignment] = courses[indexPath.row].assignments
-        if assignments.count != 0 {
-            var total = 0.0, max = 0.0
-            for assignment in assignments {
-                total += assignment.score
-                max += assignment.max
+        let currentCourse = courses[indexPath.row]
+        let assignments:[Assignment] = currentCourse.assignments
+        let weights = currentCourse.weights
+        
+        print(currentCourse)
+        
+        if (weights.count == 1) {
+            if assignments.count != 0 {
+                var total = 0.0, max = 0.0
+                for assignment in assignments {
+                    total += assignment.score
+                    max += assignment.max
+                }
+                
+                let percent = total / max * 100.0
+                cell.percentageLabel.text = String(format: "%.1f", percent) + "%"
+            } else {
+                cell.percentageLabel.text = "--%"
             }
-            
-            let percent = total / max * 100.0
-            cell.percentageLabel.text = String(format: "%.1f", percent) + "%"
         } else {
-            cell.percentageLabel.text = "--%"
+            if (assignments.count == 0) {
+                cell.percentageLabel.text = "--%"
+            } else {
+                //cell.percentageLabel.text = "--%"
+                var pointTotals:[String:[Double]] = [:]
+                for entry in weights {
+                    pointTotals[entry.key] = [0.0, 0.0]
+                }
+                
+                for assignment in assignments {
+                    pointTotals[assignment.type]![0] += assignment.score
+                    pointTotals[assignment.type]![1] += assignment.max
+                }
+                
+                var pointsToGrade:[String:Double] = [:]
+                
+                for entry in pointTotals {
+                    if (pointTotals[entry.key]![1] != 0.0) {
+                        pointsToGrade[entry.key] = pointTotals[entry.key]![0] / pointTotals[entry.key]![1] * 100
+                    } else {
+                        pointsToGrade[entry.key] = 100.0
+                    }
+                }
+                
+                for entry in pointsToGrade {
+                    pointsToGrade[entry.key] = entry.value * weights[entry.key]!
+                }
+                
+                var sum = 0.0
+                
+                for entry in pointsToGrade {
+                    sum += entry.value
+                }
+                
+                let sumString = String.init(format: "%.1f", sum)
+                
+                cell.percentageLabel.text = "\(sumString)%"
+            }
         }
+        
         
         
         return cell
@@ -131,6 +182,27 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func unwindToHome(_ sender: UIStoryboardSegue) {
         coursesTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle:UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            print("Deleted")
+            
+            if (courses.count == 1) {
+                courses = []
+                coursesTableView.reloadData()
+            } else {
+                courses.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
+            
+            let data = try? PropertyListEncoder().encode(courses)
+            
+            UserDefaults.standard.set(data, forKey: "myCourses")
+        }
+        
     }
     
 }

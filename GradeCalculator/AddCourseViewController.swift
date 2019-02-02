@@ -43,6 +43,9 @@ class AddCourseViewController: UIViewController {
             let credits = Int(creditHourField.text!)!
             var toAdd = Course(name: courseName!, weights: ["All": 1.0], assignments: [], credits: credits)
             
+            if (weights.count > 0) {
+                toAdd.weights = weights
+            }
             
             if let dest = segue.destination as? HomeScreenViewController {
                 myCourses.append(toAdd)
@@ -84,10 +87,12 @@ class AddCourseViewController: UIViewController {
     @IBAction func checkInfo(_ sender: Any) {
         
         if let courseName = courseNameField.text, let credits = Int(creditHourField.text!) {
-            if gradeSystemControl.selectedSegmentIndex == 0 {
-                navigationItem.rightBarButtonItem!.isEnabled = true
+            if gradeSystemControl.selectedSegmentIndex == 1 {
+                if chosenWeightsLabel.text != "Choose 'Set Weights' to set weights" {
+                    navigationItem.rightBarButtonItem!.isEnabled = true
+                }
             } else {
-                navigationItem.rightBarButtonItem!.isEnabled = false
+                navigationItem.rightBarButtonItem!.isEnabled = true
             }
         } else {
             navigationItem.rightBarButtonItem!.isEnabled = false
@@ -101,6 +106,7 @@ class AddCourseViewController: UIViewController {
             setWeightsButton.isEnabled = false
             chosenWeightsLabel.isHidden = true
             weights = ["All": 1.0]
+            navigationItem.rightBarButtonItem!.isEnabled = true
         } else {
             setWeightsButton.isEnabled = true
             weights = [:]
@@ -108,7 +114,7 @@ class AddCourseViewController: UIViewController {
                 chosenWeightsLabel.text = "Choose 'Set Weights' to set weights"
             }
             chosenWeightsLabel.isHidden = false
-            //display the chosen weights
+            navigationItem.rightBarButtonItem!.isEnabled = false
         }
     }
     
@@ -129,6 +135,17 @@ class AddCourseViewController: UIViewController {
             }
             
             chosenWeightsLabel.isHidden = false
+            
+            navigationItem.rightBarButtonItem!.isEnabled = false
+            
+            if let courseName = courseNameField.text {
+                if let hours = creditHourField.text {
+                    if courseName != "" && hours != "" {
+                        navigationItem.rightBarButtonItem!.isEnabled = true
+                    }
+                }
+            }
+            
         } else {
             chosenWeightsLabel.isHidden = true
         }
