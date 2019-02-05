@@ -550,8 +550,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assignment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NsP-RK-9KO">
-                                                    <rect key="frame" x="15" y="38" width="113.5" height="24"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <rect key="frame" x="15" y="38" width="103.5" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -572,6 +572,7 @@
                                         <connections>
                                             <outlet property="courseNameLabel" destination="NsP-RK-9KO" id="jhc-NZ-iaQ"/>
                                             <outlet property="percentageLabel" destination="m2K-Km-vp0" id="MHY-ol-2QZ"/>
+                                            <segue destination="AsB-ls-yfd" kind="show" identifier="toViewAssignment" id="6Hu-Cd-Hav"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -586,14 +587,11 @@
                                 <segue destination="KOl-QK-ene" kind="unwind" identifier="coursePageToHome" unwindAction="unwindToHome:" id="EYT-hk-AFZ"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="xzh-Cm-Yub">
-                                <connections>
-                                    <segue destination="keC-Bi-pGZ" kind="show" identifier="toAddAssignment" id="H4P-Zs-ULa"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="edit" id="ENR-ae-GDa"/>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xzh-Cm-Yub">
+                            <connections>
+                                <segue destination="keC-Bi-pGZ" kind="show" identifier="toAddAssignment" id="H4P-Zs-ULa"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="assignmentsTableView" destination="Qfg-fd-Qg6" id="5DU-Dk-qpU"/>
@@ -603,6 +601,101 @@
                 <exit id="KOl-QK-ene" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2889" y="903"/>
+        </scene>
+        <!--Assignment Name-->
+        <scene sceneID="DDu-NT-IoA">
+            <objects>
+                <viewController id="AsB-ls-yfd" customClass="AssignmentScreenViewController" customModule="GradeCalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sbA-5I-0Fq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="010-E5-SjK">
+                                <rect key="frame" x="263" y="144" width="96" height="46"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                <connections>
+                                    <action selector="changeVals:" destination="AsB-ls-yfd" eventType="editingChanged" id="Fw6-er-Gt6"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K1P-kl-yNB">
+                                <rect key="frame" x="263" y="231" width="96" height="46"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                <connections>
+                                    <action selector="changeVals:" destination="AsB-ls-yfd" eventType="editingChanged" id="eOy-nf-HlF"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Out of" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoI-RG-e2g">
+                                <rect key="frame" x="16" y="233" width="94" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5R-EI-BM9">
+                                <rect key="frame" x="16" y="146" width="87" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Pr-xa-xBI">
+                                <rect key="frame" x="118" y="375" width="139" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAd-Z0-6be">
+                                <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="K1P-kl-yNB" firstAttribute="centerY" secondItem="qoI-RG-e2g" secondAttribute="centerY" id="2Pp-31-WVH"/>
+                            <constraint firstItem="WHy-0G-dAf" firstAttribute="trailing" secondItem="010-E5-SjK" secondAttribute="trailing" constant="16" id="57J-9f-gzW"/>
+                            <constraint firstItem="pAd-Z0-6be" firstAttribute="top" secondItem="6Pr-xa-xBI" secondAttribute="bottom" constant="34" id="Dih-Rk-b67"/>
+                            <constraint firstItem="010-E5-SjK" firstAttribute="leading" secondItem="h5R-EI-BM9" secondAttribute="trailing" constant="160" id="EnJ-Ge-vhR"/>
+                            <constraint firstItem="h5R-EI-BM9" firstAttribute="top" secondItem="WHy-0G-dAf" secondAttribute="top" constant="30" id="HJi-5R-uvh"/>
+                            <constraint firstItem="pAd-Z0-6be" firstAttribute="leading" secondItem="WHy-0G-dAf" secondAttribute="leading" id="O6m-Ej-wwe"/>
+                            <constraint firstItem="pAd-Z0-6be" firstAttribute="bottom" secondItem="WHy-0G-dAf" secondAttribute="bottom" id="OPm-8Y-wfD"/>
+                            <constraint firstItem="h5R-EI-BM9" firstAttribute="leading" secondItem="WHy-0G-dAf" secondAttribute="leading" constant="16" id="WLW-sv-tkI"/>
+                            <constraint firstItem="K1P-kl-yNB" firstAttribute="leading" secondItem="qoI-RG-e2g" secondAttribute="trailing" constant="153" id="c4U-PY-api"/>
+                            <constraint firstItem="6Pr-xa-xBI" firstAttribute="centerX" secondItem="sbA-5I-0Fq" secondAttribute="centerX" id="gv5-JV-okH"/>
+                            <constraint firstItem="6Pr-xa-xBI" firstAttribute="top" secondItem="qoI-RG-e2g" secondAttribute="bottom" constant="100" id="jSf-XL-QQQ"/>
+                            <constraint firstItem="qoI-RG-e2g" firstAttribute="leading" secondItem="h5R-EI-BM9" secondAttribute="leading" id="lFu-Jn-OsL"/>
+                            <constraint firstItem="pAd-Z0-6be" firstAttribute="trailing" secondItem="WHy-0G-dAf" secondAttribute="trailing" id="nYz-aE-IJf"/>
+                            <constraint firstItem="qoI-RG-e2g" firstAttribute="top" secondItem="h5R-EI-BM9" secondAttribute="bottom" constant="45" id="plH-Oi-oja"/>
+                            <constraint firstItem="WHy-0G-dAf" firstAttribute="trailing" secondItem="K1P-kl-yNB" secondAttribute="trailing" constant="16" id="pmY-1k-U5R"/>
+                            <constraint firstItem="010-E5-SjK" firstAttribute="centerY" secondItem="h5R-EI-BM9" secondAttribute="centerY" id="uh8-j7-j6J"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WHy-0G-dAf"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="fXs-jm-aQS" appends="YES" id="Nfk-rx-LFh"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Assignment Name" id="iTz-6l-Ivg">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="bAe-yu-RHa">
+                            <connections>
+                                <segue destination="nSo-1e-oJD" kind="unwind" identifier="saveEditedCourse" unwindAction="unwindToCoursePageFor:towards:" id="gt5-wm-a3l"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="categoryPicker" destination="pAd-Z0-6be" id="eqq-Rr-oCW"/>
+                        <outlet property="outOfTextField" destination="K1P-kl-yNB" id="T82-dp-Q0c"/>
+                        <outlet property="scoreTextField" destination="010-E5-SjK" id="tMr-PJ-bjO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nwd-No-mip" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="fXs-jm-aQS">
+                    <connections>
+                        <action selector="exitKeyboard:" destination="AsB-ls-yfd" id="9F3-iy-8Zc"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <exit id="nSo-1e-oJD" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2889" y="1701"/>
         </scene>
         <!--Add Assignment-->
         <scene sceneID="MWB-uT-fra">
@@ -640,7 +733,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                 <connections>
                                     <action selector="validateForm:" destination="keC-Bi-pGZ" eventType="editingChanged" id="EAo-rM-HcW"/>
                                 </connections>
@@ -658,7 +751,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                 <connections>
                                     <action selector="validateForm:" destination="keC-Bi-pGZ" eventType="editingChanged" id="Bls-je-lqh"/>
                                     <action selector="validateForm:" destination="keC-Bi-pGZ" eventType="valueChanged" id="yos-OK-CpW"/>

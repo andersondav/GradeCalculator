@@ -67,19 +67,17 @@ class AddAssignmentViewController: UIViewController, UIPickerViewDelegate, UIPic
         if (name == "" || score == "" || outOf == "") {
             navigationItem.rightBarButtonItem?.isEnabled = false
         } else {
-            let numScore = Double(score!)
-            let numOutOf = Double(outOf!)
-            
-            if (numScore ?? -1 < 0 || numOutOf ?? -1 < 0) {
-                navigationItem.rightBarButtonItem?.isEnabled = false
-                return
+            if let numScore = Double(score!) {
+                if let numOutOf = Double(outOf!) {
+                    if (numScore >= 0 && numOutOf >= 0) {
+                        navigationItem.rightBarButtonItem?.isEnabled = true
+                        return
+                    }
+                }
             }
             
-            if (numScore ?? 0 <= numOutOf ?? 0) {
-                navigationItem.rightBarButtonItem?.isEnabled = true
-            } else {
-                navigationItem.rightBarButtonItem?.isEnabled = false
-            }
+            navigationItem.rightBarButtonItem?.isEnabled = false
+            
         }
         
     }

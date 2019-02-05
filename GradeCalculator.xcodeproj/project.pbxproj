@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71281D76220A022600A9AD08 /* AssignmentScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71281D75220A022600A9AD08 /* AssignmentScreenViewController.swift */; };
 		714FC93C21E91AFC00080C2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FC93B21E91AFC00080C2A /* AppDelegate.swift */; };
 		714FC93E21E91AFC00080C2A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FC93D21E91AFC00080C2A /* ViewController.swift */; };
 		714FC94121E91AFC00080C2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 714FC93F21E91AFC00080C2A /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		71281D75220A022600A9AD08 /* AssignmentScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentScreenViewController.swift; sourceTree = "<group>"; };
 		714FC93821E91AFC00080C2A /* GradeCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GradeCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		714FC93B21E91AFC00080C2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		714FC93D21E91AFC00080C2A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				714FC93B21E91AFC00080C2A /* AppDelegate.swift */,
 				714FC93D21E91AFC00080C2A /* ViewController.swift */,
 				714FC93F21E91AFC00080C2A /* Main.storyboard */,
+				71281D75220A022600A9AD08 /* AssignmentScreenViewController.swift */,
 				71DB2D7B21FE6EB9009CDC11 /* SetWeightsViewController.swift */,
 				714FC95921EE98AD00080C2A /* AddAssignmentViewController.swift */,
 				714FC95721EE55B300080C2A /* CoursePageViewController.swift */,
@@ -173,6 +176,7 @@
 				714FC95A21EE98AD00080C2A /* AddAssignmentViewController.swift in Sources */,
 				714FC95021EA7A1600080C2A /* HomeScreenCourseCell.swift in Sources */,
 				71DB2D7C21FE6EB9009CDC11 /* SetWeightsViewController.swift in Sources */,
+				71281D76220A022600A9AD08 /* AssignmentScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

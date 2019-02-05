@@ -58,6 +58,24 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
                 dest.coursesTableView.reloadData()
             }
         }
+        
+        if segue.identifier == "toViewAssignment" {
+            if let dest = segue.destination as? AssignmentScreenViewController {
+                if let data = UserDefaults.standard.value(forKey:"myCourses") as? Data {
+                    dest.myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data)
+                }
+                dest.courseIndex = self.index
+                
+                let sendingCell = sender as! HomeScreenCourseCell
+                
+                let index = assignmentsTableView.indexPath(for: sendingCell)
+                
+                dest.assignmentIndex = index!.row
+                
+                assignmentsTableView.deselectRow(at: index!, animated: true)
+                
+            }
+        }
     }
  
     
