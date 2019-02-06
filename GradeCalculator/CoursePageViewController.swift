@@ -76,6 +76,16 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
                 
             }
         }
+        
+        if segue.identifier == "showCourseInfo" {
+            if let dest = segue.destination as? CourseInfoViewController {
+                if let data = UserDefaults.standard.value(forKey:"myCourses") as? Data {
+                    dest.myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data)
+                }
+                dest.courseIndex = self.index
+                dest.percentGrade = self.percentGrade
+            }
+        }
     }
  
     

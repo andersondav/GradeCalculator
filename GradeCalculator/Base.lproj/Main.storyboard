@@ -587,11 +587,18 @@
                                 <segue destination="KOl-QK-ene" kind="unwind" identifier="coursePageToHome" unwindAction="unwindToHome:" id="EYT-hk-AFZ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xzh-Cm-Yub">
-                            <connections>
-                                <segue destination="keC-Bi-pGZ" kind="show" identifier="toAddAssignment" id="H4P-Zs-ULa"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="xzh-Cm-Yub">
+                                <connections>
+                                    <segue destination="keC-Bi-pGZ" kind="show" identifier="toAddAssignment" id="H4P-Zs-ULa"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Info" style="plain" id="x6O-2l-u3p">
+                                <connections>
+                                    <segue destination="EP4-0B-IJS" kind="show" identifier="showCourseInfo" id="lAs-zx-gy0"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="assignmentsTableView" destination="Qfg-fd-Qg6" id="5DU-Dk-qpU"/>
@@ -696,6 +703,100 @@
                 <exit id="nSo-1e-oJD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2889" y="1701"/>
+        </scene>
+        <!--Course Info-->
+        <scene sceneID="87A-A3-IkB">
+            <objects>
+                <viewController id="EP4-0B-IJS" customClass="CourseInfoViewController" customModule="GradeCalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SWQ-SL-jpN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xx.x%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhL-r3-s3k">
+                                <rect key="frame" x="271.5" y="156" width="87.5" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grade:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PdQ-lG-7HG">
+                                <rect key="frame" x="16" y="156" width="102" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit hours:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TyL-pa-3y1">
+                                <rect key="frame" x="16" y="253" width="193" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AKI-HF-RfJ">
+                                <rect key="frame" x="259" y="251" width="100" height="46"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="validateChange:" destination="EP4-0B-IJS" eventType="editingChanged" id="ONc-ny-ogI"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weights:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLV-kW-OId">
+                                <rect key="frame" x="16" y="372" width="343" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DS-Hm-KhW">
+                                <rect key="frame" x="16" y="422" width="343" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lhL-r3-s3k" firstAttribute="centerY" secondItem="PdQ-lG-7HG" secondAttribute="centerY" id="9Cn-fq-f6c"/>
+                            <constraint firstItem="PdQ-lG-7HG" firstAttribute="top" secondItem="yak-1j-X55" secondAttribute="top" constant="40" id="Teq-7A-pF8"/>
+                            <constraint firstItem="yak-1j-X55" firstAttribute="trailing" secondItem="AKI-HF-RfJ" secondAttribute="trailing" constant="16" id="Xu9-a1-HMN"/>
+                            <constraint firstItem="TyL-pa-3y1" firstAttribute="top" secondItem="PdQ-lG-7HG" secondAttribute="bottom" constant="55" id="YqD-NJ-bu1"/>
+                            <constraint firstItem="AKI-HF-RfJ" firstAttribute="centerY" secondItem="TyL-pa-3y1" secondAttribute="centerY" id="avc-2Y-FaR"/>
+                            <constraint firstItem="PdQ-lG-7HG" firstAttribute="leading" secondItem="yak-1j-X55" secondAttribute="leading" constant="16" id="cBI-mb-37r"/>
+                            <constraint firstItem="0DS-Hm-KhW" firstAttribute="top" secondItem="jLV-kW-OId" secondAttribute="bottom" constant="8" id="eI2-sg-b6d"/>
+                            <constraint firstItem="AKI-HF-RfJ" firstAttribute="leading" secondItem="TyL-pa-3y1" secondAttribute="trailing" constant="50" id="eaP-fz-LtU"/>
+                            <constraint firstItem="jLV-kW-OId" firstAttribute="top" secondItem="AKI-HF-RfJ" secondAttribute="bottom" constant="75" id="i7F-gQ-Zd1"/>
+                            <constraint firstItem="yak-1j-X55" firstAttribute="trailing" secondItem="jLV-kW-OId" secondAttribute="trailing" constant="16" id="iSg-HG-fxc"/>
+                            <constraint firstItem="yak-1j-X55" firstAttribute="trailing" secondItem="lhL-r3-s3k" secondAttribute="trailing" constant="16" id="jl7-fp-fNS"/>
+                            <constraint firstItem="jLV-kW-OId" firstAttribute="leading" secondItem="yak-1j-X55" secondAttribute="leading" constant="16" id="meL-ap-Fdp"/>
+                            <constraint firstItem="0DS-Hm-KhW" firstAttribute="leading" secondItem="yak-1j-X55" secondAttribute="leading" constant="16" id="stY-5T-BMh"/>
+                            <constraint firstItem="TyL-pa-3y1" firstAttribute="leading" secondItem="yak-1j-X55" secondAttribute="leading" constant="16" id="vBQ-dS-HdQ"/>
+                            <constraint firstItem="yak-1j-X55" firstAttribute="trailing" secondItem="0DS-Hm-KhW" secondAttribute="trailing" constant="16" id="zUo-JS-qif"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yak-1j-X55"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="xrp-De-c9d" appends="YES" id="LVf-n4-OuX"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Course Info" id="58O-nW-Yy3">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="0uW-ot-Om6">
+                            <connections>
+                                <segue destination="pIK-xo-2sU" kind="unwind" unwindAction="unwindToCoursePageFor:towards:" id="ZyR-5d-Hfy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="creditHourField" destination="AKI-HF-RfJ" id="Aio-JN-pam"/>
+                        <outlet property="gradeLabel" destination="lhL-r3-s3k" id="L8E-4M-TnK"/>
+                        <outlet property="weightsLabel" destination="0DS-Hm-KhW" id="7GB-F7-Bny"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="olM-ed-fU9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="xrp-De-c9d">
+                    <connections>
+                        <action selector="exitKeyboard:" destination="EP4-0B-IJS" id="0f1-6j-u8l"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <exit id="pIK-xo-2sU" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3716" y="1701"/>
         </scene>
         <!--Add Assignment-->
         <scene sceneID="MWB-uT-fra">
