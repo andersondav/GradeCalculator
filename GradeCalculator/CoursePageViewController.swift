@@ -106,7 +106,7 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
         if (course?.assignments.count == 0) {
             assignmentsTableView.allowsSelection = false
             cell.courseNameLabel.text = "Tap \"+\" to add assignments"
-            cell.courseNameLabel.font = UIFont.systemFont(ofSize: cell.courseNameLabel.font.pointSize)
+            cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: cell.courseNameLabel.font.pointSize)
             cell.percentageLabel.text = ""
             return cell
         }

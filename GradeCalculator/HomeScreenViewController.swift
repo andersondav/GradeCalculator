@@ -103,7 +103,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         if (courses.count == 0) {
             cell.courseNameLabel.text = "Tap \"+\" to add courses"
-            cell.courseNameLabel.font = UIFont.systemFont(ofSize: cell.courseNameLabel.font.pointSize)
+            cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: cell.courseNameLabel.font.pointSize)
             cell.percentageLabel.text = ""
             coursesTableView.allowsSelection = false
             return cell

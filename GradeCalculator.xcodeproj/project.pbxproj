@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59814E144902BB94B9965C01 /* Pods_GradeCalculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7640782D33C24339DC9BA10 /* Pods_GradeCalculator.framework */; };
 		71281D76220A022600A9AD08 /* AssignmentScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71281D75220A022600A9AD08 /* AssignmentScreenViewController.swift */; };
 		71281D7C220B883300A9AD08 /* CourseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71281D7B220B883300A9AD08 /* CourseInfoViewController.swift */; };
 		714FC93C21E91AFC00080C2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FC93B21E91AFC00080C2A /* AppDelegate.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		66A0F780D6E2496D20A21C85 /* Pods-GradeCalculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradeCalculator.release.xcconfig"; path = "Pods/Target Support Files/Pods-GradeCalculator/Pods-GradeCalculator.release.xcconfig"; sourceTree = "<group>"; };
 		71281D75220A022600A9AD08 /* AssignmentScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentScreenViewController.swift; sourceTree = "<group>"; };
 		71281D7B220B883300A9AD08 /* CourseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoViewController.swift; sourceTree = "<group>"; };
 		714FC93821E91AFC00080C2A /* GradeCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GradeCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +46,8 @@
 		714FC95921EE98AD00080C2A /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
 		71DB2D7B21FE6EB9009CDC11 /* SetWeightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetWeightsViewController.swift; sourceTree = "<group>"; };
 		71DB2D83220258D1009CDC11 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8B4ABCF5E5A16693DE8E4DB3 /* Pods-GradeCalculator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradeCalculator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GradeCalculator/Pods-GradeCalculator.debug.xcconfig"; sourceTree = "<group>"; };
+		A7640782D33C24339DC9BA10 /* Pods_GradeCalculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GradeCalculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,17 +55,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59814E144902BB94B9965C01 /* Pods_GradeCalculator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6EFB253701523D03F2DF3AC3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7640782D33C24339DC9BA10 /* Pods_GradeCalculator.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		714FC92F21E91AFB00080C2A = {
 			isa = PBXGroup;
 			children = (
 				714FC93A21E91AFC00080C2A /* GradeCalculator */,
 				714FC93921E91AFC00080C2A /* Products */,
+				C59571CD3BF3474CC744B131 /* Pods */,
+				6EFB253701523D03F2DF3AC3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +112,15 @@
 			path = GradeCalculator;
 			sourceTree = "<group>";
 		};
+		C59571CD3BF3474CC744B131 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B4ABCF5E5A16693DE8E4DB3 /* Pods-GradeCalculator.debug.xcconfig */,
+				66A0F780D6E2496D20A21C85 /* Pods-GradeCalculator.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -104,9 +128,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 714FC94A21E91B0000080C2A /* Build configuration list for PBXNativeTarget "GradeCalculator" */;
 			buildPhases = (
+				19C409ADFCA279E614E15C40 /* [CP] Check Pods Manifest.lock */,
 				714FC93421E91AFC00080C2A /* Sources */,
 				714FC93521E91AFC00080C2A /* Frameworks */,
 				714FC93621E91AFC00080C2A /* Resources */,
+				BFAAD6809B40E9100C95B8A7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -162,6 +188,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		19C409ADFCA279E614E15C40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GradeCalculator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BFAAD6809B40E9100C95B8A7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GradeCalculator/Pods-GradeCalculator-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GradeCalculator/Pods-GradeCalculator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		714FC93421E91AFC00080C2A /* Sources */ = {
@@ -324,6 +397,7 @@
 		};
 		714FC94B21E91B0000080C2A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B4ABCF5E5A16693DE8E4DB3 /* Pods-GradeCalculator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -343,6 +417,7 @@
 		};
 		714FC94C21E91B0000080C2A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66A0F780D6E2496D20A21C85 /* Pods-GradeCalculator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
