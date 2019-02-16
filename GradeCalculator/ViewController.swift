@@ -25,7 +25,9 @@ class ViewController: UIViewController {
         let Name  = "e.g. John"
         
         // Set the Font
-        placeHolder = NSMutableAttributedString(string:Name, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 35.0)])
+        placeHolder = NSMutableAttributedString(string:Name, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20.0, weight: .light)])
+        
+        
         
         // Set the color
         placeHolder.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.lightGray, range:NSRange(location:0,length:Name.count))

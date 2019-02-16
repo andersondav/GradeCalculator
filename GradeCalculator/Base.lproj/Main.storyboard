@@ -18,8 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your name to get started" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34x-UA-Fy6">
+                                <rect key="frame" x="29" y="353" width="317" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p1b-TT-d3v" customClass="YokoTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="29.5" y="391" width="316.5" height="90"/>
+                                <rect key="frame" x="29" y="391" width="317" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="ZQU-uB-C5v"/>
                                 </constraints>
@@ -48,8 +54,15 @@
                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your name to get started" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34x-UA-Fy6">
-                                <rect key="frame" x="29.5" y="353" width="316.5" height="30"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="nyO-1z-nD0">
+                                <rect key="frame" x="37.5" y="128" width="300" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="549-qA-i6V"/>
+                                    <constraint firstAttribute="width" constant="300" id="Hax-JD-Eax"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s04-v2-tLr">
+                                <rect key="frame" x="125" y="90" width="125" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -59,11 +72,15 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XyX-n7-oBn" secondAttribute="bottom" constant="75" id="134-Dk-hDV"/>
                             <constraint firstItem="XyX-n7-oBn" firstAttribute="top" secondItem="rB7-3V-qkh" secondAttribute="bottom" constant="15" id="1fD-rJ-wXI"/>
+                            <constraint firstItem="nyO-1z-nD0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8Rg-j6-ix9"/>
                             <constraint firstItem="p1b-TT-d3v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GAA-u0-Bej"/>
+                            <constraint firstItem="s04-v2-tLr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="J6L-Ol-xUK"/>
                             <constraint firstItem="rB7-3V-qkh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NRy-tj-J51"/>
+                            <constraint firstItem="nyO-1z-nD0" firstAttribute="top" secondItem="s04-v2-tLr" secondAttribute="bottom" constant="8" id="TR1-Yl-ZrH"/>
                             <constraint firstItem="rB7-3V-qkh" firstAttribute="top" secondItem="p1b-TT-d3v" secondAttribute="bottom" constant="10" id="dD9-DM-KyT"/>
                             <constraint firstItem="p1b-TT-d3v" firstAttribute="width" secondItem="34x-UA-Fy6" secondAttribute="width" id="nJQ-oM-Z0y"/>
                             <constraint firstItem="p1b-TT-d3v" firstAttribute="top" secondItem="34x-UA-Fy6" secondAttribute="bottom" constant="8" id="rTE-3C-RFM"/>
+                            <constraint firstItem="34x-UA-Fy6" firstAttribute="top" secondItem="nyO-1z-nD0" secondAttribute="bottom" constant="25" id="wdN-E0-fKS"/>
                             <constraint firstItem="34x-UA-Fy6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yeg-vF-79y"/>
                             <constraint firstItem="XyX-n7-oBn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zpH-G0-5Jj"/>
                         </constraints>
@@ -1038,4 +1055,7 @@
             <point key="canvasLocation" x="1949.5999999999999" y="129.98500749625188"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AppLogo" width="1024" height="1024"/>
+    </resources>
 </document>
