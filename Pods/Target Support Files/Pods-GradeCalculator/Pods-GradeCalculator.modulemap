@@ -1,0 +1,6 @@
+framework module Pods_GradeCalculator {
+  umbrella header "Pods-GradeCalculator-umbrella.h"
+
+  export *
+  module * { export * }
+}

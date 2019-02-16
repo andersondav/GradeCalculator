@@ -43,7 +43,7 @@ class SettingsViewController: UIViewController {
  
 
     @IBAction func validateName(_ sender: Any) {
-        if (newUsernameField.text != "") {
+        if (newUsernameField.text != "" && newUsernameField.text != nil) {
             setNewNameButton.isEnabled = true
         }
     }
