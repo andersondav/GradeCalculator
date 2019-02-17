@@ -201,7 +201,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fN9-5p-fx7">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="-4" width="375" height="577"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeScreenCourseCell" rowHeight="100" id="WC6-I4-Qiz" customClass="HomeScreenCourseCell" customModule="GradeCalculator" customModuleProvider="target">
@@ -239,15 +239,46 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZy-HF-G89" customClass="AkiraTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="8" y="573" width="277" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="Zag-eE-HOa"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="foregroundColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.14954516179999999" green="0.88149606449999995" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dla-aG-wIj">
+                                <rect key="frame" x="293" y="611" width="74" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="Clear"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fN9-5p-fx7" firstAttribute="leading" secondItem="bO1-nb-PSU" secondAttribute="leading" id="BW0-Nn-KfU"/>
-                            <constraint firstItem="fN9-5p-fx7" firstAttribute="bottom" secondItem="bO1-nb-PSU" secondAttribute="bottom" id="FmY-7c-lgu"/>
-                            <constraint firstItem="fN9-5p-fx7" firstAttribute="top" secondItem="rJQ-ad-3ct" secondAttribute="top" id="Qzn-8s-0Hv"/>
+                            <constraint firstItem="fN9-5p-fx7" firstAttribute="top" secondItem="rJQ-ad-3ct" secondAttribute="top" constant="-4" id="Qzn-8s-0Hv"/>
+                            <constraint firstItem="fZy-HF-G89" firstAttribute="leading" secondItem="bO1-nb-PSU" secondAttribute="leading" constant="8" id="Wvl-4r-auI"/>
+                            <constraint firstItem="bO1-nb-PSU" firstAttribute="bottom" secondItem="dla-aG-wIj" secondAttribute="bottom" constant="10" id="h4r-Ni-cBG"/>
+                            <constraint firstItem="dla-aG-wIj" firstAttribute="leading" secondItem="fZy-HF-G89" secondAttribute="trailing" constant="8" id="hAm-eE-3MO"/>
                             <constraint firstItem="fN9-5p-fx7" firstAttribute="trailing" secondItem="bO1-nb-PSU" secondAttribute="trailing" id="lWc-lb-LQV"/>
+                            <constraint firstItem="fZy-HF-G89" firstAttribute="top" secondItem="fN9-5p-fx7" secondAttribute="bottom" id="oe4-d0-qjt"/>
+                            <constraint firstItem="bO1-nb-PSU" firstAttribute="trailing" secondItem="fZy-HF-G89" secondAttribute="trailing" constant="90" id="pUb-Pm-cgq"/>
+                            <constraint firstItem="bO1-nb-PSU" firstAttribute="trailing" secondItem="dla-aG-wIj" secondAttribute="trailing" constant="8" id="rWA-Fu-Rd3"/>
+                            <constraint firstAttribute="bottom" secondItem="fZy-HF-G89" secondAttribute="bottom" constant="4" id="zPB-lh-yo6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bO1-nb-PSU"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="U85-xy-WVz" appends="YES" id="cLg-65-GvQ"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="x's courses" id="bOu-f8-567">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="rSG-4j-E24">
@@ -266,6 +297,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bfw-Ax-Fuj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="U85-xy-WVz">
+                    <connections>
+                        <action selector="exitKeyboard:" destination="ciz-aZ-VSc" id="pKM-u6-Ak8"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2888.8000000000002" y="129.98500749625188"/>
         </scene>

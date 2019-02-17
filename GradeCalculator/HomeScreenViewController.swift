@@ -42,6 +42,9 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         coursesTableView.reloadData()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,10 +66,24 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 dest.courseName = (sendingCell?.courseNameLabel.text)!
                 dest.percentGrade = (sendingCell?.percentageLabel.text)!
                 
-                let index:IndexPath = coursesTableView.indexPath(for: sendingCell!)!
-                coursesTableView.deselectRow(at: index, animated: true)
-                //dest.course = courses[index.row]
-                dest.index = index.row
+//                let index:IndexPath = coursesTableView.indexPath(for: sendingCell!)!
+//                coursesTableView.deselectRow(at: index, animated: true)
+//                //dest.course = courses[index.row]
+//                dest.index = index.row
+                var row = -1
+                var counter = 0
+                for entry in courses {
+                    if sendingCell?.courseNameLabel.text == entry.name {
+                        row = counter
+                    }
+                    counter += 1
+                }
+                
+                if (row >= 0) {
+                    dest.index = row
+                } else {
+                    dest.index = 0
+                }
                 
                 if let data = UserDefaults.standard.value(forKey: "myCourses") {
                     dest.myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data as! Data)
@@ -203,6 +220,24 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             UserDefaults.standard.set(data, forKey: "myCourses")
         }
         
+    }
+    
+    @IBAction func exitKeyboard(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
     
 }
