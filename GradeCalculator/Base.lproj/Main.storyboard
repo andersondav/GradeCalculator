@@ -201,11 +201,66 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fN9-5p-fx7">
-                                <rect key="frame" x="0.0" y="-4" width="375" height="577"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="C2Z-hh-es0">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Us2-BU-Esi">
+                                            <rect key="frame" x="8" y="5" width="292" height="50"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="uKO-fp-vus"/>
+                                            </constraints>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="foregroundColor">
+                                                    <color key="value" white="0.89515478289999995" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="filter:" destination="ciz-aZ-VSc" eventType="editingChanged" id="arj-Yn-uQn"/>
+                                            </connections>
+                                        </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qgp-MT-A9S">
+                                            <rect key="frame" x="314" y="12" width="47" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <state key="normal" title="Clear"/>
+                                            <connections>
+                                                <action selector="endEdit:" destination="ciz-aZ-VSc" eventType="touchUpInside" id="a9B-Gc-GJj"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.14954516179999999" green="0.88149606449999995" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <gestureRecognizers/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Qgp-MT-A9S" secondAttribute="trailing" constant="14" id="46x-Uz-LXH"/>
+                                        <constraint firstAttribute="trailing" secondItem="Us2-BU-Esi" secondAttribute="trailing" constant="75" id="PBr-ku-Ddn"/>
+                                        <constraint firstItem="Us2-BU-Esi" firstAttribute="leading" secondItem="C2Z-hh-es0" secondAttribute="leading" constant="8" id="VuI-15-qRH"/>
+                                        <constraint firstItem="Us2-BU-Esi" firstAttribute="top" secondItem="C2Z-hh-es0" secondAttribute="top" constant="5" id="dHA-z4-xiJ"/>
+                                        <constraint firstItem="Qgp-MT-A9S" firstAttribute="centerY" secondItem="Us2-BU-Esi" secondAttribute="centerY" id="dRo-tp-LhV"/>
+                                        <constraint firstAttribute="bottom" secondItem="Us2-BU-Esi" secondAttribute="bottom" constant="5" id="va6-h5-BSR"/>
+                                        <constraint firstItem="Qgp-MT-A9S" firstAttribute="leading" secondItem="Us2-BU-Esi" secondAttribute="trailing" constant="14" id="wGF-aB-NWw"/>
+                                    </constraints>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="uRw-ob-aHl" appends="YES" id="F28-yv-q0q"/>
+                                    </connections>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeScreenCourseCell" rowHeight="100" id="WC6-I4-Qiz" customClass="HomeScreenCourseCell" customModule="GradeCalculator" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="88" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WC6-I4-Qiz" id="wV3-0R-wyK">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
@@ -231,6 +286,7 @@
                                                 <constraint firstItem="fA8-XF-jyN" firstAttribute="centerY" secondItem="wV3-0R-wyK" secondAttribute="centerY" id="ySi-DM-0wj"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                         <connections>
                                             <outlet property="courseNameLabel" destination="fA8-XF-jyN" id="gKY-P6-QFR"/>
                                             <outlet property="percentageLabel" destination="EcB-Zu-9oL" id="4oM-Wi-x7n"/>
@@ -239,46 +295,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZy-HF-G89" customClass="AkiraTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="8" y="573" width="277" height="90"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="Zag-eE-HOa"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="foregroundColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.14954516179999999" green="0.88149606449999995" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dla-aG-wIj">
-                                <rect key="frame" x="293" y="611" width="74" height="46"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <state key="normal" title="Clear"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fN9-5p-fx7" firstAttribute="leading" secondItem="bO1-nb-PSU" secondAttribute="leading" id="BW0-Nn-KfU"/>
-                            <constraint firstItem="fN9-5p-fx7" firstAttribute="top" secondItem="rJQ-ad-3ct" secondAttribute="top" constant="-4" id="Qzn-8s-0Hv"/>
-                            <constraint firstItem="fZy-HF-G89" firstAttribute="leading" secondItem="bO1-nb-PSU" secondAttribute="leading" constant="8" id="Wvl-4r-auI"/>
-                            <constraint firstItem="bO1-nb-PSU" firstAttribute="bottom" secondItem="dla-aG-wIj" secondAttribute="bottom" constant="10" id="h4r-Ni-cBG"/>
-                            <constraint firstItem="dla-aG-wIj" firstAttribute="leading" secondItem="fZy-HF-G89" secondAttribute="trailing" constant="8" id="hAm-eE-3MO"/>
+                            <constraint firstItem="bO1-nb-PSU" firstAttribute="bottom" secondItem="fN9-5p-fx7" secondAttribute="bottom" id="Qg5-Xc-f5T"/>
+                            <constraint firstItem="fN9-5p-fx7" firstAttribute="top" secondItem="rJQ-ad-3ct" secondAttribute="top" id="Qzn-8s-0Hv"/>
                             <constraint firstItem="fN9-5p-fx7" firstAttribute="trailing" secondItem="bO1-nb-PSU" secondAttribute="trailing" id="lWc-lb-LQV"/>
-                            <constraint firstItem="fZy-HF-G89" firstAttribute="top" secondItem="fN9-5p-fx7" secondAttribute="bottom" id="oe4-d0-qjt"/>
-                            <constraint firstItem="bO1-nb-PSU" firstAttribute="trailing" secondItem="fZy-HF-G89" secondAttribute="trailing" constant="90" id="pUb-Pm-cgq"/>
-                            <constraint firstItem="bO1-nb-PSU" firstAttribute="trailing" secondItem="dla-aG-wIj" secondAttribute="trailing" constant="8" id="rWA-Fu-Rd3"/>
-                            <constraint firstAttribute="bottom" secondItem="fZy-HF-G89" secondAttribute="bottom" constant="4" id="zPB-lh-yo6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bO1-nb-PSU"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="U85-xy-WVz" appends="YES" id="cLg-65-GvQ"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="x's courses" id="bOu-f8-567">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="rSG-4j-E24">
@@ -294,12 +319,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="coursesTableView" destination="fN9-5p-fx7" id="ukp-QS-2JE"/>
+                        <outlet property="searchBar" destination="Us2-BU-Esi" id="67X-qt-Ao6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bfw-Ax-Fuj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="U85-xy-WVz">
+                <tapGestureRecognizer id="uRw-ob-aHl">
                     <connections>
-                        <action selector="exitKeyboard:" destination="ciz-aZ-VSc" id="pKM-u6-Ak8"/>
+                        <action selector="exitKeyboard:" destination="ciz-aZ-VSc" id="XF1-GE-NB8"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -354,8 +380,7 @@
                                     <segment title="Weighted"/>
                                 </segments>
                                 <connections>
-                                    <action selector="checkInfo:" destination="YO3-0y-DNN" eventType="valueChanged" id="YDX-Tx-meC"/>
-                                    <action selector="checkWeighting:" destination="YO3-0y-DNN" eventType="valueChanged" id="cuE-cZ-rTX"/>
+                                    <action selector="checkWeighting:" destination="YO3-0y-DNN" eventType="valueChanged" id="1j1-bJ-xDe"/>
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALA-7d-Vjg">

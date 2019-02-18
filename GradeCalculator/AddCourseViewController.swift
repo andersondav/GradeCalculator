@@ -89,6 +89,11 @@ class AddCourseViewController: UIViewController {
         
         if let courseName = courseNameField.text, let credits = Int(creditHourField.text!) {
             
+            if (courseName.isEmpty) {
+                navigationItem.rightBarButtonItem!.isEnabled = false
+                return
+            }
+            
             var found = false
             for entry in myCourses {
                 if (entry.name == courseName) {
@@ -106,7 +111,7 @@ class AddCourseViewController: UIViewController {
                 if chosenWeightsLabel.text != "Choose 'Set Weights' to set weights" {
                     navigationItem.rightBarButtonItem!.isEnabled = true
                 } else {
-                    navigationItem.rightBarButtonItem!.isEnabled = true
+                    navigationItem.rightBarButtonItem!.isEnabled = false
                 }
             } else {
                 navigationItem.rightBarButtonItem!.isEnabled = true
@@ -122,7 +127,15 @@ class AddCourseViewController: UIViewController {
             chosenWeightsLabel.isHidden = true
             weights = ["All": 1.0]
             navigationItem.rightBarButtonItem!.isEnabled = true
-            checkInfo(self)
+            if (courseNameField.text!.isEmpty) {
+                navigationItem.rightBarButtonItem!.isEnabled = false
+                return
+            }
+            
+            if let credits = Int(creditHourField.text!) {
+                navigationItem.rightBarButtonItem!.isEnabled = false
+                return
+            }
         } else {
             setWeightsButton.isEnabled = true
             weights = [:]

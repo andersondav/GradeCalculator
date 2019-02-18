@@ -70,7 +70,16 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 let index = assignmentsTableView.indexPath(for: sendingCell)
                 
-                dest.assignmentIndex = index!.row
+                var counter = 0
+                
+                for entry in myCourses[self.index].assignments {
+                    if (entry.name == sendingCell.courseNameLabel.text) {
+                        break
+                    }
+                    counter += 1
+                }
+                
+                dest.assignmentIndex = counter
                 
                 assignmentsTableView.deselectRow(at: index!, animated: true)
                 
