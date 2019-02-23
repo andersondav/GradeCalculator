@@ -59,6 +59,7 @@ class AssignmentScreenViewController: UIViewController, UIPickerViewDelegate, UI
         }
         
         navigationItem.rightBarButtonItem!.isEnabled = false
+        
     }
     
 

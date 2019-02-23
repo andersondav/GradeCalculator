@@ -42,8 +42,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         coursesTableView.dataSource = self
         coursesTableView.delegate = self
-        
-        coursesTableView.reloadData()
+        coursesTableView.keyboardDismissMode = .onDrag
         
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 20))
         searchBar.leftView = paddingView
@@ -205,7 +204,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             return cell
             
         } else if (filteredCourses.count == 0) {
-            cell.courseNameLabel.text = "No matches found."
+            cell.courseNameLabel.text = "No matching results."
             cell.percentageLabel.text = ""
             return cell
         } else {

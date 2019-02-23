@@ -207,7 +207,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Us2-BU-Esi">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Filter" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Us2-BU-Esi">
                                             <rect key="frame" x="8" y="5" width="292" height="50"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -667,9 +667,65 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="MXO-5j-sic">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Filter" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dw1-yd-1xJ">
+                                            <rect key="frame" x="8" y="5" width="292" height="50"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="n0m-4C-TJ2"/>
+                                            </constraints>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="foregroundColor">
+                                                    <color key="value" white="0.89515478289999995" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="filter:" destination="UPN-RD-2zb" eventType="editingChanged" id="xMt-Bg-pfM"/>
+                                            </connections>
+                                        </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IE1-m3-UD2">
+                                            <rect key="frame" x="314" y="12" width="47" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <state key="normal" title="Clear"/>
+                                            <connections>
+                                                <action selector="clearSearchBar:" destination="UPN-RD-2zb" eventType="touchUpInside" id="4CC-Z9-sw5"/>
+                                                <action selector="endEdit:" destination="ciz-aZ-VSc" eventType="touchUpInside" id="mmR-jv-Kmq"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.14954516179999999" green="0.88149606449999995" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <gestureRecognizers/>
+                                    <constraints>
+                                        <constraint firstItem="Dw1-yd-1xJ" firstAttribute="leading" secondItem="MXO-5j-sic" secondAttribute="leading" constant="8" id="0e5-uW-Zbq"/>
+                                        <constraint firstAttribute="bottom" secondItem="Dw1-yd-1xJ" secondAttribute="bottom" constant="5" id="0qA-rE-Ie3"/>
+                                        <constraint firstAttribute="trailing" secondItem="Dw1-yd-1xJ" secondAttribute="trailing" constant="75" id="TKZ-OL-rUv"/>
+                                        <constraint firstItem="IE1-m3-UD2" firstAttribute="centerY" secondItem="Dw1-yd-1xJ" secondAttribute="centerY" id="ez4-Aq-KYx"/>
+                                        <constraint firstItem="Dw1-yd-1xJ" firstAttribute="top" secondItem="MXO-5j-sic" secondAttribute="top" constant="5" id="rvO-AS-VcR"/>
+                                        <constraint firstAttribute="trailing" secondItem="IE1-m3-UD2" secondAttribute="trailing" constant="14" id="t1m-Bs-2Jo"/>
+                                        <constraint firstItem="IE1-m3-UD2" firstAttribute="leading" secondItem="Dw1-yd-1xJ" secondAttribute="trailing" constant="14" id="wBO-fb-7gT"/>
+                                    </constraints>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="Wia-kU-mTS" appends="YES" id="Hdc-nm-LPs"/>
+                                    </connections>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AssignmentCell" rowHeight="100" id="cZX-P6-VSO" customClass="HomeScreenCourseCell" customModule="GradeCalculator" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="88" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cZX-P6-VSO" id="IC9-dV-H8a">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
@@ -728,9 +784,15 @@
                     </navigationItem>
                     <connections>
                         <outlet property="assignmentsTableView" destination="Qfg-fd-Qg6" id="5DU-Dk-qpU"/>
+                        <outlet property="searchBar" destination="Dw1-yd-1xJ" id="GWq-2Q-ji0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Re3-bF-SYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Wia-kU-mTS">
+                    <connections>
+                        <action selector="exitKeyboard:" destination="UPN-RD-2zb" id="xHP-9Z-wBs"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <exit id="KOl-QK-ene" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2889" y="903"/>
