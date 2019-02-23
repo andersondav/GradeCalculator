@@ -64,9 +64,22 @@ class AddAssignmentViewController: UIViewController, UIPickerViewDelegate, UIPic
         let score = scoreField.text
         let outOf = outOfField.text
         
-        if (name == "" || score == "" || outOf == "") {
+        if ((name?.isEmpty)! || (score?.isEmpty)! || (outOf?.isEmpty)!) {
             navigationItem.rightBarButtonItem?.isEnabled = false
         } else {
+            
+            var found = false
+            for entry in myCourses[index].assignments {
+                if (entry.name == name) {
+                    found = true
+                }
+            }
+            
+            if (found) {
+                navigationItem.rightBarButtonItem?.isEnabled = false
+                return
+            }
+            
             if let numScore = Double(score!) {
                 if let numOutOf = Double(outOf!) {
                     if (numScore >= 0 && numOutOf >= 0) {

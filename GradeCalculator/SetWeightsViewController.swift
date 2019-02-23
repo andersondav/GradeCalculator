@@ -66,6 +66,8 @@ class SetWeightsViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             saveButton.isEnabled = true
         }
+        categoryLabel.text = ""
+        weightLabel.text = ""
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

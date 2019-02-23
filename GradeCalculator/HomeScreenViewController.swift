@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import TextFieldEffects
 
 class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var coursesTableView: UITableView!
+    @IBOutlet weak var searchBar: MinoruTextField!
     
     var username = ""
     
     var courses = [Course]()
+    var filteredCourses = [Course]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +42,11 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         coursesTableView.dataSource = self
         coursesTableView.delegate = self
+        coursesTableView.keyboardDismissMode = .onDrag
         
-        coursesTableView.reloadData()
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 20))
+        searchBar.leftView = paddingView
+        searchBar.leftViewMode = .always
         
     }
     
@@ -63,16 +69,32 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 dest.courseName = (sendingCell?.courseNameLabel.text)!
                 dest.percentGrade = (sendingCell?.percentageLabel.text)!
                 
-                let index:IndexPath = coursesTableView.indexPath(for: sendingCell!)!
-                coursesTableView.deselectRow(at: index, animated: true)
-                //dest.course = courses[index.row]
-                dest.index = index.row
+//                let index:IndexPath = coursesTableView.indexPath(for: sendingCell!)!
+//                coursesTableView.deselectRow(at: index, animated: true)
+//                //dest.course = courses[index.row]
+//                dest.index = index.row
+                var row = -1
+                var counter = 0
+                for entry in courses {
+                    if sendingCell?.courseNameLabel.text == entry.name {
+                        row = counter
+                    }
+                    counter += 1
+                }
+                
+                if (row >= 0) {
+                    dest.index = row
+                } else {
+                    dest.index = 0
+                }
                 
                 if let data = UserDefaults.standard.value(forKey: "myCourses") {
                     dest.myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data as! Data)
                 }
             }
         }
+        
+        view.endEditing(true)
         
     }
     
@@ -89,6 +111,10 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (courses.count == 0) {
+            return 1
+        } else if (filteredCourses.count != 0) {
+            return filteredCourses.count
+        } else if (filteredCourses.count == 0 && !(searchBar.text!.isEmpty)) {
             return 1
         }
         
@@ -109,75 +135,149 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             return cell
         }
         
-        //get the course name
-        let courseName = courses[indexPath.row].name
-        cell.courseNameLabel?.text = courseName
-        cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
-        
-        //calculate grade
-        let currentCourse = courses[indexPath.row]
-        let assignments:[Assignment] = currentCourse.assignments
-        let weights = currentCourse.weights
-        
-        print(currentCourse)
-        
-        if (weights.count == 1) {
-            if assignments.count != 0 {
-                var total = 0.0, max = 0.0
-                for assignment in assignments {
-                    total += assignment.score
-                    max += assignment.max
-                }
-                
-                let percent = total / max * 100.0
-                cell.percentageLabel.text = String(format: "%.1f", percent) + "%"
-            } else {
-                cell.percentageLabel.text = "--%"
-            }
-        } else {
-            if (assignments.count == 0) {
-                cell.percentageLabel.text = "--%"
-            } else {
-                //cell.percentageLabel.text = "--%"
-                var pointTotals:[String:[Double]] = [:]
-                for entry in weights {
-                    pointTotals[entry.key] = [0.0, 0.0]
-                }
-                
-                for assignment in assignments {
-                    pointTotals[assignment.type]![0] += assignment.score
-                    pointTotals[assignment.type]![1] += assignment.max
-                }
-                
-                var pointsToGrade:[String:Double] = [:]
-                
-                for entry in pointTotals {
-                    if (pointTotals[entry.key]![1] != 0.0) {
-                        pointsToGrade[entry.key] = pointTotals[entry.key]![0] / pointTotals[entry.key]![1] * 100
-                    } else {
-                        pointsToGrade[entry.key] = 100.0
+        if (searchBar.text!.isEmpty && filteredCourses.count == 0) {
+            //get the course name
+            let courseName = courses[indexPath.row].name
+            cell.courseNameLabel?.text = courseName
+            cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
+            
+            //calculate grade
+            let currentCourse = courses[indexPath.row]
+            let assignments:[Assignment] = currentCourse.assignments
+            let weights = currentCourse.weights
+            
+            print(currentCourse)
+            
+            if (weights.count == 1) {
+                if assignments.count != 0 {
+                    var total = 0.0, max = 0.0
+                    for assignment in assignments {
+                        total += assignment.score
+                        max += assignment.max
                     }
+                    
+                    let percent = total / max * 100.0
+                    cell.percentageLabel.text = String(format: "%.1f", percent) + "%"
+                } else {
+                    cell.percentageLabel.text = "--%"
                 }
-                
-                for entry in pointsToGrade {
-                    pointsToGrade[entry.key] = entry.value * weights[entry.key]!
+            } else {
+                if (assignments.count == 0) {
+                    cell.percentageLabel.text = "--%"
+                } else {
+                    //cell.percentageLabel.text = "--%"
+                    var pointTotals:[String:[Double]] = [:]
+                    for entry in weights {
+                        pointTotals[entry.key] = [0.0, 0.0]
+                    }
+                    
+                    for assignment in assignments {
+                        pointTotals[assignment.type]![0] += assignment.score
+                        pointTotals[assignment.type]![1] += assignment.max
+                    }
+                    
+                    var pointsToGrade:[String:Double] = [:]
+                    
+                    for entry in pointTotals {
+                        if (pointTotals[entry.key]![1] != 0.0) {
+                            pointsToGrade[entry.key] = pointTotals[entry.key]![0] / pointTotals[entry.key]![1] * 100
+                        } else {
+                            pointsToGrade[entry.key] = 100.0
+                        }
+                    }
+                    
+                    for entry in pointsToGrade {
+                        pointsToGrade[entry.key] = entry.value * weights[entry.key]!
+                    }
+                    
+                    var sum = 0.0
+                    
+                    for entry in pointsToGrade {
+                        sum += entry.value
+                    }
+                    
+                    let sumString = String.init(format: "%.1f", sum)
+                    
+                    cell.percentageLabel.text = "\(sumString)%"
                 }
-                
-                var sum = 0.0
-                
-                for entry in pointsToGrade {
-                    sum += entry.value
-                }
-                
-                let sumString = String.init(format: "%.1f", sum)
-                
-                cell.percentageLabel.text = "\(sumString)%"
             }
+            return cell
+            
+        } else if (filteredCourses.count == 0) {
+            cell.courseNameLabel.text = "No matching results."
+            cell.percentageLabel.text = ""
+            return cell
+        } else {
+            //get the course name
+            let courseName = filteredCourses[indexPath.row].name
+            cell.courseNameLabel?.text = courseName
+            cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
+            
+            //calculate grade
+            let currentCourse = filteredCourses[indexPath.row]
+            let assignments:[Assignment] = currentCourse.assignments
+            let weights = currentCourse.weights
+            
+            print(currentCourse)
+            
+            if (weights.count == 1) {
+                if assignments.count != 0 {
+                    var total = 0.0, max = 0.0
+                    for assignment in assignments {
+                        total += assignment.score
+                        max += assignment.max
+                    }
+                    
+                    let percent = total / max * 100.0
+                    cell.percentageLabel.text = String(format: "%.1f", percent) + "%"
+                } else {
+                    cell.percentageLabel.text = "--%"
+                }
+            } else {
+                if (assignments.count == 0) {
+                    cell.percentageLabel.text = "--%"
+                } else {
+                    //cell.percentageLabel.text = "--%"
+                    var pointTotals:[String:[Double]] = [:]
+                    for entry in weights {
+                        pointTotals[entry.key] = [0.0, 0.0]
+                    }
+                    
+                    for assignment in assignments {
+                        pointTotals[assignment.type]![0] += assignment.score
+                        pointTotals[assignment.type]![1] += assignment.max
+                    }
+                    
+                    var pointsToGrade:[String:Double] = [:]
+                    
+                    for entry in pointTotals {
+                        if (pointTotals[entry.key]![1] != 0.0) {
+                            pointsToGrade[entry.key] = pointTotals[entry.key]![0] / pointTotals[entry.key]![1] * 100
+                        } else {
+                            pointsToGrade[entry.key] = 100.0
+                        }
+                    }
+                    
+                    for entry in pointsToGrade {
+                        pointsToGrade[entry.key] = entry.value * weights[entry.key]!
+                    }
+                    
+                    var sum = 0.0
+                    
+                    for entry in pointsToGrade {
+                        sum += entry.value
+                    }
+                    
+                    let sumString = String.init(format: "%.1f", sum)
+                    
+                    cell.percentageLabel.text = "\(sumString)%"
+                }
+            }
+            return cell
         }
         
-        
-        
         return cell
+        
     }
     
     @IBAction func unwindToHome(_ sender: UIStoryboardSegue) {
@@ -205,4 +305,33 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    @IBAction func exitKeyboard(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
+    @IBAction func endEdit(_ sender: Any) {
+        searchBar.text = ""
+        view.endEditing(true)
+        filter(self)
+    }
+    
+    @IBAction func filter(_ sender: Any) {
+        let searchTerm = searchBar.text!.lowercased()
+        
+        filteredCourses = []
+        
+        if (searchTerm.isEmpty) {
+            coursesTableView.reloadData()
+            return
+        }
+        
+        for entry in courses {
+            let lowercaseName = entry.name.lowercased()
+            if (lowercaseName.contains(searchTerm)) {
+                filteredCourses.append(entry)
+            }
+        }
+        
+        coursesTableView.reloadData()
+    }
 }

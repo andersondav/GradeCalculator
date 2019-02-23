@@ -88,18 +88,37 @@ class AddCourseViewController: UIViewController {
     @IBAction func checkInfo(_ sender: Any) {
         
         if let courseName = courseNameField.text, let credits = Int(creditHourField.text!) {
+            
+            if (courseName.isEmpty) {
+                navigationItem.rightBarButtonItem!.isEnabled = false
+                return
+            }
+            
+            var found = false
+            for entry in myCourses {
+                if (entry.name == courseName) {
+                    found = true
+                    break
+                }
+            }
+            
+            if (found) {
+                navigationItem.rightBarButtonItem!.isEnabled = false
+                return
+            }
+            
             if gradeSystemControl.selectedSegmentIndex == 1 {
                 if chosenWeightsLabel.text != "Choose 'Set Weights' to set weights" {
                     navigationItem.rightBarButtonItem!.isEnabled = true
+                } else {
+                    navigationItem.rightBarButtonItem!.isEnabled = false
                 }
             } else {
                 navigationItem.rightBarButtonItem!.isEnabled = true
+                
             }
-        } else {
-            navigationItem.rightBarButtonItem!.isEnabled = false
+        
         }
-        
-        
     }
     
     @IBAction func checkWeighting(_ sender: Any) {
@@ -108,6 +127,15 @@ class AddCourseViewController: UIViewController {
             chosenWeightsLabel.isHidden = true
             weights = ["All": 1.0]
             navigationItem.rightBarButtonItem!.isEnabled = true
+            if (courseNameField.text!.isEmpty) {
+                navigationItem.rightBarButtonItem!.isEnabled = false
+                return
+            }
+            
+            if let credits = Int(creditHourField.text!) {
+                navigationItem.rightBarButtonItem!.isEnabled = false
+                return
+            }
         } else {
             setWeightsButton.isEnabled = true
             weights = [:]
@@ -116,6 +144,7 @@ class AddCourseViewController: UIViewController {
             }
             chosenWeightsLabel.isHidden = false
             navigationItem.rightBarButtonItem!.isEnabled = false
+            checkInfo(self)
         }
     }
     
@@ -150,5 +179,6 @@ class AddCourseViewController: UIViewController {
         } else {
             chosenWeightsLabel.isHidden = true
         }
+        checkInfo(self)
     }
 }

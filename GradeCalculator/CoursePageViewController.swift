@@ -15,7 +15,10 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
     var course:Course? = Course()
     var index:Int = 0
     var myCourses:[Course] = []
+    var filteredAssignments = [Assignment]()
 
+    @IBOutlet weak var searchBar: UITextField!
+    
     @IBOutlet weak var assignmentsTableView: UITableView!
     
     override func viewDidLoad() {
@@ -34,8 +37,13 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
         
         assignmentsTableView.dataSource = self
         assignmentsTableView.delegate = self
+        assignmentsTableView.keyboardDismissMode = .onDrag
         
         navigationItem.hidesBackButton = true
+        
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 20))
+        searchBar.leftView = paddingView
+        searchBar.leftViewMode = .always
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,7 +78,16 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 let index = assignmentsTableView.indexPath(for: sendingCell)
                 
-                dest.assignmentIndex = index!.row
+                var counter = 0
+                
+                for entry in myCourses[self.index].assignments {
+                    if (entry.name == sendingCell.courseNameLabel.text) {
+                        break
+                    }
+                    counter += 1
+                }
+                
+                dest.assignmentIndex = counter
                 
                 assignmentsTableView.deselectRow(at: index!, animated: true)
                 
@@ -86,11 +103,16 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
                 dest.percentGrade = self.percentGrade
             }
         }
+        view.endEditing(true)
     }
  
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (course?.assignments.count == 0) {
+            return 1
+        } else if (filteredAssignments.count != 0) {
+            return filteredAssignments.count
+        } else if (filteredAssignments.count == 0 && !(searchBar.text!.isEmpty)) {
             return 1
         } else {
             return course?.assignments.count ?? 0
@@ -109,16 +131,27 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: cell.courseNameLabel.font.pointSize)
             cell.percentageLabel.text = ""
             return cell
+        } else if (filteredAssignments.count != 0) {
+            cell.courseNameLabel.text = filteredAssignments[indexPath.row].name
+            let score = filteredAssignments[indexPath.row].score
+            let max = filteredAssignments[indexPath.row].max
+            
+            cell.percentageLabel.text = "\(score)/\(max)"
+            return cell
+        } else if (!searchBar.text!.isEmpty && filteredAssignments.count == 0) {
+            cell.courseNameLabel.text = "No matching results."
+            cell.percentageLabel.text = ""
+            return cell
+        } else {
+            cell.courseNameLabel.text = course?.assignments[indexPath.row].name
+            
+            let score = course!.assignments[indexPath.row].score
+            let max = course!.assignments[indexPath.row].max
+            
+            cell.percentageLabel.text = "\(score)/\(max)"
+            
+            return cell
         }
-        
-        cell.courseNameLabel.text = course?.assignments[indexPath.row].name
-        
-        let score = course!.assignments[indexPath.row].score
-        let max = course!.assignments[indexPath.row].max
-        
-        cell.percentageLabel.text = "\(score)/\(max)"
-        
-        return cell
     }
     
     @IBAction func unwindToCoursePage(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
@@ -148,4 +181,30 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
 
+    @IBAction func exitKeyboard(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
+    @IBAction func filter(_ sender: Any) {
+        filteredAssignments = []
+        
+        if var searchTerm = searchBar.text {
+            if !searchTerm.isEmpty {
+                searchTerm = searchTerm.lowercased()
+                for entry in (course?.assignments)! {
+                    if entry.name.lowercased().contains(searchTerm) {
+                        filteredAssignments.append(entry)
+                    }
+                }
+                assignmentsTableView.reloadData()
+            } else {
+                assignmentsTableView.reloadData()
+            }
+        }
+    }
+    
+    @IBAction func clearSearchBar(_ sender: Any) {
+        searchBar.text = ""
+        filter(self)
+    }
 }
