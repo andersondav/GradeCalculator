@@ -35,6 +35,8 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        //see if user has logged in with name before, and send them to main screen if done
         if let username = UserDefaults.standard.object(forKey: "username") as? String {
             if (username == "") {
                 print("empty string")
@@ -43,9 +45,11 @@ class ViewController: UIViewController {
             }
             
         }
+        
     }
 
     @IBAction func exitKeyboard(_ sender: Any) {
+        // exits keyboard when user taps off a text field
         view.endEditing(true)
     }
     
@@ -56,7 +60,7 @@ class ViewController: UIViewController {
                 errorLabel.text = "Name must not include spaces."
                 errorLabel.textColor = UIColor.red
                 startButton.isEnabled = false
-            } else if (name == "") {
+            } else if (name.isEmpty) {
                 errorLabel.text = "Please input a valid name."
                 errorLabel.textColor = UIColor.red
                 startButton.isEnabled = false
@@ -72,23 +76,12 @@ class ViewController: UIViewController {
         
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "setUpSegue" {
-//            if let dest = segue.destination as? HomeScreenViewController {
-//                //dest.username = username
-//                UserDefaults.standard.set(self.username , forKey: "username")
-//            }
-//        }
-//    }
-    
     @IBAction func login(_ sender: Any) {
         
+        // when pressing start button, save the username and an empty course array
         UserDefaults.standard.set(self.username, forKey: "username")
-        
-        var courses:[Course] = []
-        
+        let courses:[Course] = []
         UserDefaults.standard.set(courses, forKey: "myCourses")
-        
         self.performSegue(withIdentifier: "setUpSegue", sender: self)
         
     }

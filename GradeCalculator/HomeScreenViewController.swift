@@ -12,8 +12,9 @@ import TextFieldEffects
 class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var coursesTableView: UITableView!
-    @IBOutlet weak var searchBar: MinoruTextField!
+    @IBOutlet weak var searchBar: UITextField!
     
+    //used for the VC's title
     var username = ""
     
     var courses = [Course]()
@@ -22,28 +23,27 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // retrieve the stored username and set as title
         username = UserDefaults.standard.object(forKey: "username") as! String
+        self.title = "\(username)'s Courses"
         
+        // retrieve the stored course array
         let data = UserDefaults.standard.value(forKey: "myCourses") as? Data ?? nil
-        
         if (data != nil) {
             courses = try! PropertyListDecoder().decode(Array<Course>.self, from: data!)
         } else {
             courses = []
         }
         
-        // Do any additional setup after loading the view.
-        self.title = "\(username)'s Courses"
+        // Hide back button
         navigationItem.hidesBackButton = true
         
-        //add an example course
-//        courses.append(Course())
-//        courses.append(Course())
-        
+        // TableView setup
         coursesTableView.dataSource = self
         coursesTableView.delegate = self
         coursesTableView.keyboardDismissMode = .onDrag
         
+        // set search bar padding
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 20))
         searchBar.leftView = paddingView
         searchBar.leftViewMode = .always
@@ -51,54 +51,58 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // reset the username and title in case user changed their name
         username = UserDefaults.standard.object(forKey: "username") as! String
         self.title = "\(username)'s Courses"
     }
     
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // MARK: - NAVIGATION METHODS
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
         if segue.identifier == "toCoursePage" {
             if let dest = segue.destination as? CoursePageViewController {
+                
+                // send the course name, percent grade, and index in courses tableView to dest
                 let sendingCell = sender as? HomeScreenCourseCell
                 dest.courseName = (sendingCell?.courseNameLabel.text)!
                 dest.percentGrade = (sendingCell?.percentageLabel.text)!
-                
-//                let index:IndexPath = coursesTableView.indexPath(for: sendingCell!)!
-//                coursesTableView.deselectRow(at: index, animated: true)
-//                //dest.course = courses[index.row]
-//                dest.index = index.row
-                var row = -1
-                var counter = 0
-                for entry in courses {
-                    if sendingCell?.courseNameLabel.text == entry.name {
-                        row = counter
-                    }
-                    counter += 1
-                }
-                
+
+                var row = findCourseInArray(courseName: (sendingCell?.courseNameLabel.text)!)
                 if (row >= 0) {
                     dest.index = row
                 } else {
                     dest.index = 0
                 }
                 
+                // deselect the selected cell
+                let index:IndexPath = coursesTableView.indexPath(for: sendingCell!)!
+                coursesTableView.deselectRow(at: index, animated: true)
+                
+                // send most recent courses array to dest
                 if let data = UserDefaults.standard.value(forKey: "myCourses") {
                     dest.myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data as! Data)
                 }
             }
         }
         
+        // exit the keyboard
         view.endEditing(true)
         
     }
     
+    func findCourseInArray(courseName: String) -> Int {
+        var counter = 0
+        for entry in courses {
+            if courseName == entry.name {
+                return counter
+            }
+            counter += 1
+        }
+        return -1
+    }
+    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        // ensures that if there are no courses, user cannot select a cell
         if (identifier == "toCoursePage") {
             let sendingCell = sender as? HomeScreenCourseCell
             if (sendingCell?.percentageLabel.text == "") {
@@ -107,17 +111,19 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         return true
     }
- 
+    // MARK: - END NAVIGATION METHODS
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (courses.count == 0) {
-            return 1
-        } else if (filteredCourses.count != 0) {
-            return filteredCourses.count
-        } else if (filteredCourses.count == 0 && !(searchBar.text!.isEmpty)) {
-            return 1
-        }
         
+        if (courses.count == 0) {  // no courses have been added, so show "tap to add" cell
+            return 1
+        } else if (filteredCourses.count != 0) {  // filter has results, so return filtered count
+            return filteredCourses.count
+        } else if (filteredCourses.count == 0 && !(searchBar.text!.isEmpty)) {  // no filtered results, so return "no
+             return 1                                                              // matches found cell"
+        }
+        //no filtering and courses have been added
         return courses.count
     }
     
@@ -127,157 +133,107 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         coursesTableView.allowsSelection = true
         
-        if (courses.count == 0) {
+        if (courses.count == 0) {  // no courses have been added
             cell.courseNameLabel.text = "Tap \"+\" to add courses"
             cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: cell.courseNameLabel.font.pointSize)
             cell.percentageLabel.text = ""
+            
+            //disable selection of "tap to add" cell
             coursesTableView.allowsSelection = false
             return cell
         }
         
-        if (searchBar.text!.isEmpty && filteredCourses.count == 0) {
+        if (searchBar.text!.isEmpty && filteredCourses.count == 0) {  // normal course array
+            
             //get the course name
             let courseName = courses[indexPath.row].name
             cell.courseNameLabel?.text = courseName
             cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
             
             //calculate grade
-            let currentCourse = courses[indexPath.row]
-            let assignments:[Assignment] = currentCourse.assignments
-            let weights = currentCourse.weights
-            
-            print(currentCourse)
-            
-            if (weights.count == 1) {
-                if assignments.count != 0 {
-                    var total = 0.0, max = 0.0
-                    for assignment in assignments {
-                        total += assignment.score
-                        max += assignment.max
-                    }
-                    
-                    let percent = total / max * 100.0
-                    cell.percentageLabel.text = String(format: "%.1f", percent) + "%"
-                } else {
-                    cell.percentageLabel.text = "--%"
-                }
-            } else {
-                if (assignments.count == 0) {
-                    cell.percentageLabel.text = "--%"
-                } else {
-                    //cell.percentageLabel.text = "--%"
-                    var pointTotals:[String:[Double]] = [:]
-                    for entry in weights {
-                        pointTotals[entry.key] = [0.0, 0.0]
-                    }
-                    
-                    for assignment in assignments {
-                        pointTotals[assignment.type]![0] += assignment.score
-                        pointTotals[assignment.type]![1] += assignment.max
-                    }
-                    
-                    var pointsToGrade:[String:Double] = [:]
-                    
-                    for entry in pointTotals {
-                        if (pointTotals[entry.key]![1] != 0.0) {
-                            pointsToGrade[entry.key] = pointTotals[entry.key]![0] / pointTotals[entry.key]![1] * 100
-                        } else {
-                            pointsToGrade[entry.key] = 100.0
-                        }
-                    }
-                    
-                    for entry in pointsToGrade {
-                        pointsToGrade[entry.key] = entry.value * weights[entry.key]!
-                    }
-                    
-                    var sum = 0.0
-                    
-                    for entry in pointsToGrade {
-                        sum += entry.value
-                    }
-                    
-                    let sumString = String.init(format: "%.1f", sum)
-                    
-                    cell.percentageLabel.text = "\(sumString)%"
-                }
-            }
+            cell.percentageLabel.text = calculateGrade(course: courses[indexPath.row])
             return cell
             
-        } else if (filteredCourses.count == 0) {
+        } else if (filteredCourses.count == 0) {  // no filtered results, show "No results" cell
             cell.courseNameLabel.text = "No matching results."
             cell.percentageLabel.text = ""
             return cell
-        } else {
+        } else {  // have filtered results, return filtered results
+            
             //get the course name
             let courseName = filteredCourses[indexPath.row].name
             cell.courseNameLabel?.text = courseName
             cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
             
             //calculate grade
-            let currentCourse = filteredCourses[indexPath.row]
-            let assignments:[Assignment] = currentCourse.assignments
-            let weights = currentCourse.weights
-            
-            print(currentCourse)
-            
-            if (weights.count == 1) {
-                if assignments.count != 0 {
-                    var total = 0.0, max = 0.0
-                    for assignment in assignments {
-                        total += assignment.score
-                        max += assignment.max
-                    }
-                    
-                    let percent = total / max * 100.0
-                    cell.percentageLabel.text = String(format: "%.1f", percent) + "%"
-                } else {
-                    cell.percentageLabel.text = "--%"
-                }
-            } else {
-                if (assignments.count == 0) {
-                    cell.percentageLabel.text = "--%"
-                } else {
-                    //cell.percentageLabel.text = "--%"
-                    var pointTotals:[String:[Double]] = [:]
-                    for entry in weights {
-                        pointTotals[entry.key] = [0.0, 0.0]
-                    }
-                    
-                    for assignment in assignments {
-                        pointTotals[assignment.type]![0] += assignment.score
-                        pointTotals[assignment.type]![1] += assignment.max
-                    }
-                    
-                    var pointsToGrade:[String:Double] = [:]
-                    
-                    for entry in pointTotals {
-                        if (pointTotals[entry.key]![1] != 0.0) {
-                            pointsToGrade[entry.key] = pointTotals[entry.key]![0] / pointTotals[entry.key]![1] * 100
-                        } else {
-                            pointsToGrade[entry.key] = 100.0
-                        }
-                    }
-                    
-                    for entry in pointsToGrade {
-                        pointsToGrade[entry.key] = entry.value * weights[entry.key]!
-                    }
-                    
-                    var sum = 0.0
-                    
-                    for entry in pointsToGrade {
-                        sum += entry.value
-                    }
-                    
-                    let sumString = String.init(format: "%.1f", sum)
-                    
-                    cell.percentageLabel.text = "\(sumString)%"
-                }
-            }
+            cell.percentageLabel.text = calculateGrade(course: filteredCourses[indexPath.row])
             return cell
         }
         
         return cell
         
+    }
+    
+    func calculateGrade(course: Course) -> String {
+        let currentCourse = course
+        let assignments:[Assignment] = currentCourse.assignments
+        let weights = currentCourse.weights
+        
+        print(currentCourse)
+        
+        if (weights.count == 1) {
+            if assignments.count != 0 {
+                var total = 0.0, max = 0.0
+                for assignment in assignments {
+                    total += assignment.score
+                    max += assignment.max
+                }
+                
+                let percent = total / max * 100.0
+                return String(format: "%.1f", percent) + "%"
+            } else {
+                return "--%"
+            }
+        } else {
+            if (assignments.count == 0) {
+                return "--%"
+            } else {
+                //cell.percentageLabel.text = "--%"
+                var pointTotals:[String:[Double]] = [:]
+                for entry in weights {
+                    pointTotals[entry.key] = [0.0, 0.0]
+                }
+                
+                for assignment in assignments {
+                    pointTotals[assignment.type]![0] += assignment.score
+                    pointTotals[assignment.type]![1] += assignment.max
+                }
+                
+                var pointsToGrade:[String:Double] = [:]
+                
+                for entry in pointTotals {
+                    if (pointTotals[entry.key]![1] != 0.0) {
+                        pointsToGrade[entry.key] = pointTotals[entry.key]![0] / pointTotals[entry.key]![1] * 100
+                    } else {
+                        pointsToGrade[entry.key] = 100.0
+                    }
+                }
+                
+                for entry in pointsToGrade {
+                    pointsToGrade[entry.key] = entry.value * weights[entry.key]!
+                }
+                
+                var sum = 0.0
+                
+                for entry in pointsToGrade {
+                    sum += entry.value
+                }
+                
+                let sumString = String.init(format: "%.1f", sum)
+                
+                return "\(sumString)%"
+            }
+        }
     }
     
     @IBAction func unwindToHome(_ sender: UIStoryboardSegue) {

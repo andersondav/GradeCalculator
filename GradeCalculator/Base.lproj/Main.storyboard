@@ -272,8 +272,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="%%%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcB-Zu-9oL">
-                                                    <rect key="frame" x="240" y="32" width="110" height="36"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%%%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcB-Zu-9oL">
+                                                    <rect key="frame" x="281.5" y="32" width="68.5" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -282,6 +282,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="EcB-Zu-9oL" secondAttribute="trailing" constant="25" id="E7I-O5-rDw"/>
                                                 <constraint firstItem="fA8-XF-jyN" firstAttribute="leading" secondItem="wV3-0R-wyK" secondAttribute="leading" constant="15" id="ee1-br-O14"/>
+                                                <constraint firstItem="EcB-Zu-9oL" firstAttribute="leading" relation="lessThanOrEqual" secondItem="fA8-XF-jyN" secondAttribute="trailing" constant="108.5" id="fmv-Lp-vU7"/>
                                                 <constraint firstItem="EcB-Zu-9oL" firstAttribute="centerY" secondItem="wV3-0R-wyK" secondAttribute="centerY" id="l5e-Wh-kDE"/>
                                                 <constraint firstItem="fA8-XF-jyN" firstAttribute="centerY" secondItem="wV3-0R-wyK" secondAttribute="centerY" id="ySi-DM-0wj"/>
                                             </constraints>
