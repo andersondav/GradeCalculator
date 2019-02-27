@@ -307,7 +307,7 @@
                         <viewLayoutGuide key="safeArea" id="bO1-nb-PSU"/>
                     </view>
                     <navigationItem key="navigationItem" title="x's courses" id="bOu-f8-567">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" id="rSG-4j-E24">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" image="settings" id="rSG-4j-E24">
                             <connections>
                                 <segue destination="WWJ-jL-NIh" kind="show" id="Bl6-do-pjm"/>
                             </connections>
@@ -1181,5 +1181,6 @@
     </scenes>
     <resources>
         <image name="AppLogo" width="1024" height="1024"/>
+        <image name="settings" width="72" height="72"/>
     </resources>
 </document>

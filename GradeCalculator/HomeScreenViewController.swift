@@ -90,6 +90,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func findCourseInArray(courseName: String) -> Int {
+        
+        // used to find a course with a given name (each courseName is unique)
         var counter = 0
         for entry in courses {
             if courseName == entry.name {
@@ -97,6 +99,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             counter += 1
         }
+        
+        // return -1 if course with that name not found
         return -1
     }
     
@@ -175,15 +179,16 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func calculateGrade(course: Course) -> String {
+        
+        // get the course, its assignments, and its weights
         let currentCourse = course
         let assignments:[Assignment] = currentCourse.assignments
         let weights = currentCourse.weights
-        
-        print(currentCourse)
-        
-        if (weights.count == 1) {
-            if assignments.count != 0 {
-                var total = 0.0, max = 0.0
+
+        if (weights.count == 1) { // if the grade system is raw points
+            if assignments.count != 0 {  // if there are assignments
+                var total = 0.0
+                var max = 0.0
                 for assignment in assignments {
                     total += assignment.score
                     max += assignment.max
@@ -191,96 +196,95 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 let percent = total / max * 100.0
                 return String(format: "%.1f", percent) + "%"
-            } else {
+            } else {  // no assignments
                 return "--%"
             }
         } else {
+            // if no assignments
             if (assignments.count == 0) {
                 return "--%"
             } else {
-                //cell.percentageLabel.text = "--%"
+                
+                //accumulate the number of points and max points for each weight category
                 var pointTotals:[String:[Double]] = [:]
                 for entry in weights {
                     pointTotals[entry.key] = [0.0, 0.0]
                 }
-                
                 for assignment in assignments {
                     pointTotals[assignment.type]![0] += assignment.score
                     pointTotals[assignment.type]![1] += assignment.max
                 }
                 
-                var pointsToGrade:[String:Double] = [:]
-                
-                for entry in pointTotals {
-                    if (pointTotals[entry.key]![1] != 0.0) {
-                        pointsToGrade[entry.key] = pointTotals[entry.key]![0] / pointTotals[entry.key]![1] * 100
-                    } else {
-                        pointsToGrade[entry.key] = 100.0
-                    }
-                }
-                
-                for entry in pointsToGrade {
-                    pointsToGrade[entry.key] = entry.value * weights[entry.key]!
-                }
-                
+                // sum up the percentage in each category the student has achieved
                 var sum = 0.0
-                
-                for entry in pointsToGrade {
-                    sum += entry.value
+                for entry in pointTotals {
+                    if (entry.value[1] != 0.0) {
+                        sum += entry.value[0] / entry.value[1] * 100.0 * weights[entry.key]!
+                    } else {
+                        sum += 100 * weights[entry.key]!
+                    }
+                    
                 }
                 
+                // set the perecentage to a string and return
                 let sumString = String.init(format: "%.1f", sum)
-                
                 return "\(sumString)%"
             }
         }
     }
     
     @IBAction func unwindToHome(_ sender: UIStoryboardSegue) {
+        // called when user has added new courses or new assignments have been created
+          // if new courses have been added, need to display on tableView,
+          // and if new assignments, need to recalculate grades
         coursesTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle:UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        if editingStyle == .delete {
-            print("Deleted")
-            
-            if (courses.count == 1) {
+        if editingStyle == .delete {  // if clicked the delete button
+            if (courses.count == 1) {  // no more courses now, need to show "tap to add" cell
                 courses = []
                 coursesTableView.reloadData()
-            } else {
+            } else {  // still other courses left, so just remove that row, no need to reload
                 courses.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
             
-            
+            // save courses array
             let data = try? PropertyListEncoder().encode(courses)
-            
             UserDefaults.standard.set(data, forKey: "myCourses")
         }
         
     }
     
     @IBAction func exitKeyboard(_ sender: Any) {
+        //called when user taps off the search bar
         view.endEditing(true)
     }
     
     @IBAction func endEdit(_ sender: Any) {
+        // called when user taps the clear button next to search bar
         searchBar.text = ""
         view.endEditing(true)
+        
+        // recall filter which will reload data with empty filteredCourse array
         filter(self)
     }
     
     @IBAction func filter(_ sender: Any) {
+        // called when the user changes what is in the search bar
         let searchTerm = searchBar.text!.lowercased()
         
+        // reset the filtered courses
         filteredCourses = []
         
-        if (searchTerm.isEmpty) {
-            coursesTableView.reloadData()
+        if (searchTerm.isEmpty) {  // no search
+            coursesTableView.reloadData()  // reload with an empty filteredCourse array
             return
         }
         
+        // if there is a search term, add relevant results to filteredCourses
         for entry in courses {
             let lowercaseName = entry.name.lowercased()
             if (lowercaseName.contains(searchTerm)) {
@@ -288,6 +292,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
         
+        // reload the tableView with a populated filteredCourse array
         coursesTableView.reloadData()
     }
 }
