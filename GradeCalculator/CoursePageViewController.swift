@@ -60,7 +60,7 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
                 UserDefaults.standard.set(try? PropertyListEncoder().encode(myCourses), forKey: "myCourses")
                 
                 if let data = UserDefaults.standard.value(forKey:"myCourses") as? Data {
-                    dest.courses = try! PropertyListDecoder().decode(Array<Course>.self, from: data)
+                    dest.myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data)
                 }
                 
                 dest.coursesTableView.reloadData()

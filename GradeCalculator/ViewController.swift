@@ -18,19 +18,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        nameTextField.adjustsFontSizeToFitWidth = false
         
+        // text field setup
+        nameTextField.adjustsFontSizeToFitWidth = false
         var placeHolder = NSMutableAttributedString()
         let Name  = "e.g. John"
-        
-        // Set the Font
         placeHolder = NSMutableAttributedString(string:Name, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20.0, weight: .light)])
-        
-        // Set the color
         placeHolder.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.lightGray, range:NSRange(location:0,length:Name.count))
-        
-        // Add attribute
         nameTextField.attributedPlaceholder = placeHolder
     }
     

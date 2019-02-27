@@ -14,26 +14,21 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var coursesTableView: UITableView!
     @IBOutlet weak var searchBar: UITextField!
     
-    //used for the VC's title
+    // used for the VC's title
     var username = ""
     
-    var courses = [Course]()
+    var myCourses = [Course]()
     var filteredCourses = [Course]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // retrieve the stored username and set as title
+        // Retrieve the stored username and set as title
         username = UserDefaults.standard.object(forKey: "username") as! String
         self.title = "\(username)'s Courses"
         
-        // retrieve the stored course array
-        let data = UserDefaults.standard.value(forKey: "myCourses") as? Data ?? nil
-        if (data != nil) {
-            courses = try! PropertyListDecoder().decode(Array<Course>.self, from: data!)
-        } else {
-            courses = []
-        }
+        // Load course array
+        loadCourseArray()
         
         // Hide back button
         navigationItem.hidesBackButton = true
@@ -50,13 +45,22 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    // Load up user's saved courses
+    func loadCourseArray() {
+        if let data = UserDefaults.standard.value(forKey:"myCourses") as? Data {
+            myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data)
+        } else {
+            myCourses = []
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         // reset the username and title in case user changed their name
         username = UserDefaults.standard.object(forKey: "username") as! String
         self.title = "\(username)'s Courses"
     }
     
-    // MARK: - NAVIGATION METHODS
+    // MARK - START NAVIGATION METHODS:
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toCoursePage" {
             if let dest = segue.destination as? CoursePageViewController {
@@ -78,9 +82,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 coursesTableView.deselectRow(at: index, animated: true)
                 
                 // send most recent courses array to dest
-                if let data = UserDefaults.standard.value(forKey: "myCourses") {
-                    dest.myCourses = try! PropertyListDecoder().decode(Array<Course>.self, from: data as! Data)
-                }
+                dest.myCourses = myCourses
             }
         }
         
@@ -93,7 +95,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         // used to find a course with a given name (each courseName is unique)
         var counter = 0
-        for entry in courses {
+        for entry in myCourses {
             if courseName == entry.name {
                 return counter
             }
@@ -115,12 +117,12 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         return true
     }
-    // MARK: - END NAVIGATION METHODS
+    // MARK - END NAVIGATION METHODS
     
-    
+    //MARK - START TABLEVIEW METHODS:
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if (courses.count == 0) {  // no courses have been added, so show "tap to add" cell
+        if (myCourses.count == 0) {  // no courses have been added, so show "tap to add" cell
             return 1
         } else if (filteredCourses.count != 0) {  // filter has results, so return filtered count
             return filteredCourses.count
@@ -128,7 +130,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
              return 1                                                              // matches found cell"
         }
         //no filtering and courses have been added
-        return courses.count
+        return myCourses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -137,7 +139,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         coursesTableView.allowsSelection = true
         
-        if (courses.count == 0) {  // no courses have been added
+        if (myCourses.count == 0) {  // no courses have been added
             cell.courseNameLabel.text = "Tap \"+\" to add courses"
             cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: cell.courseNameLabel.font.pointSize)
             cell.percentageLabel.text = ""
@@ -150,12 +152,12 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         if (searchBar.text!.isEmpty && filteredCourses.count == 0) {  // normal course array
             
             //get the course name
-            let courseName = courses[indexPath.row].name
+            let courseName = myCourses[indexPath.row].name
             cell.courseNameLabel?.text = courseName
             cell.courseNameLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
             
             //calculate grade
-            cell.percentageLabel.text = calculateGrade(course: courses[indexPath.row])
+            cell.percentageLabel.text = calculateGrade(course: myCourses[indexPath.row])
             return cell
             
         } else if (filteredCourses.count == 0) {  // no filtered results, show "No results" cell
@@ -174,9 +176,26 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             return cell
         }
         
-        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle:UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {  // if clicked the delete button
+            if (myCourses.count == 1) {  // no more courses now, need to show "tap to add" cell
+                myCourses = []
+                coursesTableView.reloadData()
+            } else {  // still other courses left, so just remove that row, no need to reload
+                myCourses.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
+            // save courses array
+            let data = try? PropertyListEncoder().encode(myCourses)
+            UserDefaults.standard.set(data, forKey: "myCourses")
+        }
         
     }
+    // MARK - END TABLEVIEW METHODS:
     
     func calculateGrade(course: Course) -> String {
         
@@ -234,28 +253,10 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func unwindToHome(_ sender: UIStoryboardSegue) {
-        // called when user has added new courses or new assignments have been created
+        // called when user has added a new course or new assignments have been created
           // if new courses have been added, need to display on tableView,
           // and if new assignments, need to recalculate grades
         coursesTableView.reloadData()
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle:UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {  // if clicked the delete button
-            if (courses.count == 1) {  // no more courses now, need to show "tap to add" cell
-                courses = []
-                coursesTableView.reloadData()
-            } else {  // still other courses left, so just remove that row, no need to reload
-                courses.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            }
-            
-            // save courses array
-            let data = try? PropertyListEncoder().encode(courses)
-            UserDefaults.standard.set(data, forKey: "myCourses")
-        }
-        
     }
     
     @IBAction func exitKeyboard(_ sender: Any) {
@@ -285,7 +286,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         
         // if there is a search term, add relevant results to filteredCourses
-        for entry in courses {
+        for entry in myCourses {
             let lowercaseName = entry.name.lowercased()
             if (lowercaseName.contains(searchTerm)) {
                 filteredCourses.append(entry)
