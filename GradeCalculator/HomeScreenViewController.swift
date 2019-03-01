@@ -53,13 +53,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             myCourses = []
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        // reset the username and title in case user changed their name
-        username = UserDefaults.standard.object(forKey: "username") as! String
-        self.title = "\(username)'s Courses"
-    }
-    
+        
     // MARK - START NAVIGATION METHODS:
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toCoursePage" {
@@ -185,7 +179,11 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 myCourses = []
                 coursesTableView.reloadData()
             } else {  // still other courses left, so just remove that row, no need to reload
-                myCourses.remove(at: indexPath.row)
+                // in case user is deleting while filtering, find the index of the course by its name, then remove that index
+                let sendingCell = coursesTableView.cellForRow(at: indexPath) as! HomeScreenCourseCell
+                let name = sendingCell.courseNameLabel.text!
+                let indexInArray = findCourseInArray(courseName: name)
+                myCourses.remove(at: indexInArray)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
             
@@ -256,6 +254,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         // called when user has added a new course or new assignments have been created
           // if new courses have been added, need to display on tableView,
           // and if new assignments, need to recalculate grades
+        print("reloading")
+        print(myCourses)
         coursesTableView.reloadData()
     }
     

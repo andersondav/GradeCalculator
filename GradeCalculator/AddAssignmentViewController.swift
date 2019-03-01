@@ -12,7 +12,7 @@ class AddAssignmentViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     var weights = [String:Double]()
     var assignmentWeights:[String] = [String]()
-    var index:Int = 0
+    var courseIndex:Int = 0
     var myCourses:[Course] = []
 
     @IBOutlet weak var nameField: UITextField!
@@ -31,7 +31,7 @@ class AddAssignmentViewController: UIViewController, UIPickerViewDelegate, UIPic
             myCourses = []
         }
         
-        let currentCourse = myCourses[index]
+        let currentCourse = myCourses[courseIndex]
         weights = currentCourse.weights
         
         scoreField.adjustsFontSizeToFitWidth = false
@@ -69,7 +69,7 @@ class AddAssignmentViewController: UIViewController, UIPickerViewDelegate, UIPic
         } else {
             
             var found = false
-            for entry in myCourses[index].assignments {
+            for entry in myCourses[courseIndex].assignments {
                 if (entry.name == name) {
                     found = true
                 }
@@ -109,7 +109,7 @@ class AddAssignmentViewController: UIViewController, UIPickerViewDelegate, UIPic
 
         let toAdd = Assignment(name: name!, type: type, score: score!, max: outOf!)
         
-        myCourses[index].assignments.append(toAdd)
+        myCourses[courseIndex].assignments.append(toAdd)
         
         UserDefaults.standard.set(try? PropertyListEncoder().encode(myCourses), forKey: "myCourses")
         
@@ -122,7 +122,7 @@ class AddAssignmentViewController: UIViewController, UIPickerViewDelegate, UIPic
                 dest.myCourses = []
             }
             
-            dest.course = dest.myCourses[index]
+//            dest.course = dest.myCourses[index]
             dest.assignmentsTableView.reloadData()
         }
         

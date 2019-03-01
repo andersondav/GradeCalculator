@@ -179,7 +179,7 @@
                         <outlet property="newUsernameField" destination="xvL-dr-1VZ" id="R3Q-98-Ctj"/>
                         <outlet property="setNewNameButton" destination="xnE-CN-6Bl" id="6qS-19-mDG"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="clearedData" id="YTO-xu-iXq"/>
-                        <segue destination="S5V-nn-jlL" kind="unwind" unwindAction="unwindToHome:" id="W3S-G7-GUd"/>
+                        <segue destination="S5V-nn-jlL" kind="unwind" identifier="unWindToHome" unwindAction="unwindToHome:" id="W3S-G7-GUd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zOQ-fJ-DUB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -567,14 +567,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opB-bG-tuu">
-                                                    <rect key="frame" x="15" y="25" width="64" height="30"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opB-bG-tuu">
+                                                    <rect key="frame" x="15" y="25" width="61" height="30"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSu-D0-tBp">
-                                                    <rect key="frame" x="312" y="28" width="48" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xx.x%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSu-D0-tBp">
+                                                    <rect key="frame" x="309" y="28" width="51" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -739,8 +739,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="x/x" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2K-Km-vp0">
-                                                    <rect key="frame" x="240" y="32" width="110" height="36"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x/x" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2K-Km-vp0">
+                                                    <rect key="frame" x="311.5" y="32" width="38.5" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -751,6 +751,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="m2K-Km-vp0" secondAttribute="trailing" constant="25" id="FYf-VZ-rgr"/>
                                                 <constraint firstItem="m2K-Km-vp0" firstAttribute="centerY" secondItem="IC9-dV-H8a" secondAttribute="centerY" id="eTF-rB-xWe"/>
                                                 <constraint firstItem="NsP-RK-9KO" firstAttribute="leading" secondItem="IC9-dV-H8a" secondAttribute="leading" constant="15" id="jve-8A-VsX"/>
+                                                <constraint firstItem="m2K-Km-vp0" firstAttribute="leading" relation="lessThanOrEqual" secondItem="NsP-RK-9KO" secondAttribute="trailing" constant="156" id="uK8-XR-6Og"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -766,18 +767,13 @@
                         <viewLayoutGuide key="safeArea" id="7hC-vh-Uec"/>
                     </view>
                     <navigationItem key="navigationItem" title="Course Name" id="xvM-v2-iLV">
-                        <barButtonItem key="leftBarButtonItem" title="Back to Courses" id="GwF-PP-8KE">
-                            <connections>
-                                <segue destination="KOl-QK-ene" kind="unwind" identifier="coursePageToHome" unwindAction="unwindToHome:" id="EYT-hk-AFZ"/>
-                            </connections>
-                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="xzh-Cm-Yub">
                                 <connections>
                                     <segue destination="keC-Bi-pGZ" kind="show" identifier="toAddAssignment" id="H4P-Zs-ULa"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Info" style="plain" id="x6O-2l-u3p">
+                            <barButtonItem title="Item" image="info" id="x6O-2l-u3p">
                                 <connections>
                                     <segue destination="EP4-0B-IJS" kind="show" identifier="showCourseInfo" id="lAs-zx-gy0"/>
                                 </connections>
@@ -787,6 +783,7 @@
                     <connections>
                         <outlet property="assignmentsTableView" destination="Qfg-fd-Qg6" id="5DU-Dk-qpU"/>
                         <outlet property="searchBar" destination="Dw1-yd-1xJ" id="GWq-2Q-ji0"/>
+                        <segue destination="KOl-QK-ene" kind="unwind" identifier="coursePageToHome" unwindAction="unwindToHome:" id="1Re-tN-wJ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Re3-bF-SYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1182,6 +1179,7 @@
     </scenes>
     <resources>
         <image name="AppLogo" width="1024" height="1024"/>
-        <image name="settings" width="72" height="72"/>
+        <image name="info" width="30" height="30"/>
+        <image name="settings" width="30" height="30"/>
     </resources>
 </document>

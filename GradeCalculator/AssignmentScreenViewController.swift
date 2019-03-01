@@ -89,7 +89,7 @@ class AssignmentScreenViewController: UIViewController, UIPickerViewDelegate, UI
             let data = UserDefaults.standard.value(forKey: "myCourses") as! Data
             dest.myCourses = try! PropertyListDecoder().decode([Course].self, from: data)
             dest.assignmentsTableView.reloadData()
-            dest.course = dest.myCourses[courseIndex]
+//            dest.course = dest.myCourses[courseIndex]
         }
     }
  

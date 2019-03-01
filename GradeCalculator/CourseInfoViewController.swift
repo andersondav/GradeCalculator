@@ -68,7 +68,7 @@ class CourseInfoViewController: UIViewController {
             UserDefaults.standard.set(data, forKey: "myCourses")
             
             dest.myCourses = try! PropertyListDecoder().decode([Course].self, from: UserDefaults.standard.value(forKey: "myCourses") as! Data)
-            dest.course = dest.myCourses[courseIndex]
+//            dest.course = dest.myCourses[courseIndex]
         }
         
         

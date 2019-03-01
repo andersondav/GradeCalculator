@@ -20,12 +20,16 @@ class SettingsViewController: UIViewController {
         setNewNameButton.isEnabled = false
     }
     
-    // MARK - START NAVIGATION METHODS:
-    func back(sender: UIBarButtonItem) {
-        // when the user presses the back button, want to reload home page with the new username
-        performSegue(withIdentifier: "settingsToHome", sender: self)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if self.isMovingFromParent {
+            let viewControllers = navigationController!.viewControllers
+            self.prepare(for: UIStoryboardSegue(identifier: "unWindToHome", source: self, destination: viewControllers[0]), sender: self)
+        }
     }
-
+    
+    // MARK - START NAVIGATION METHODS:
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // when user returns to the home page, reload the page with the most recent username
         if let dest = segue.destination as? HomeScreenViewController {
