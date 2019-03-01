@@ -202,7 +202,12 @@ class CoursePageViewController: UIViewController, UITableViewDelegate, UITableVi
                 let name = sendingCell.courseNameLabel.text!
                 let indexInArray = findAssignmentIndex(name: name)
                 myCourses[index].assignments.remove(at: indexInArray)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                if (searchBar.text!.isEmpty) {
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                } else {
+                    filter(self)
+                }
+                
             }
             
             // save the most recent course array to user defaults

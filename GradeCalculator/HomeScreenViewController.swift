@@ -184,7 +184,12 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 let name = sendingCell.courseNameLabel.text!
                 let indexInArray = findCourseInArray(courseName: name)
                 myCourses.remove(at: indexInArray)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                if (searchBar.text!.isEmpty) {
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                } else {
+                    filter(self)
+                }
+                
             }
             
             // save courses array
