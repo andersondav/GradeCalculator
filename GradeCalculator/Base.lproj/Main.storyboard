@@ -935,6 +935,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AKI-HF-RfJ" customClass="YokoTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="259" y="250" width="100" height="90"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="G4B-5D-evD"/>
                                     <constraint firstAttribute="height" constant="90" id="ocg-ae-ftg"/>
                                 </constraints>
                                 <nil key="textColor"/>
@@ -950,13 +951,13 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weights:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLV-kW-OId">
-                                <rect key="frame" x="16" y="372" width="343" height="42"/>
+                                <rect key="frame" x="16" y="370" width="343" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DS-Hm-KhW">
-                                <rect key="frame" x="16" y="422" width="343" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List of weights (multiline)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DS-Hm-KhW">
+                                <rect key="frame" x="16" y="420" width="343" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -967,7 +968,7 @@
                             <constraint firstItem="0DS-Hm-KhW" firstAttribute="top" secondItem="jLV-kW-OId" secondAttribute="bottom" constant="8" id="8pH-uF-v9c"/>
                             <constraint firstItem="lhL-r3-s3k" firstAttribute="centerY" secondItem="PdQ-lG-7HG" secondAttribute="centerY" id="9Cn-fq-f6c"/>
                             <constraint firstItem="PdQ-lG-7HG" firstAttribute="top" secondItem="yak-1j-X55" secondAttribute="top" constant="40" id="Teq-7A-pF8"/>
-                            <constraint firstItem="jLV-kW-OId" firstAttribute="top" secondItem="AKI-HF-RfJ" secondAttribute="bottom" constant="32" id="Va7-Lu-i3S"/>
+                            <constraint firstItem="jLV-kW-OId" firstAttribute="top" secondItem="AKI-HF-RfJ" secondAttribute="bottom" constant="30" id="Va7-Lu-i3S"/>
                             <constraint firstItem="yak-1j-X55" firstAttribute="trailing" secondItem="AKI-HF-RfJ" secondAttribute="trailing" constant="16" id="Xu9-a1-HMN"/>
                             <constraint firstItem="TyL-pa-3y1" firstAttribute="top" secondItem="PdQ-lG-7HG" secondAttribute="bottom" constant="55" id="YqD-NJ-bu1"/>
                             <constraint firstItem="AKI-HF-RfJ" firstAttribute="centerY" secondItem="TyL-pa-3y1" secondAttribute="bottom" id="avc-2Y-FaR"/>
@@ -977,6 +978,7 @@
                             <constraint firstItem="yak-1j-X55" firstAttribute="trailing" secondItem="jLV-kW-OId" secondAttribute="trailing" constant="16" id="iSg-HG-fxc"/>
                             <constraint firstItem="yak-1j-X55" firstAttribute="trailing" secondItem="lhL-r3-s3k" secondAttribute="trailing" constant="16" id="jl7-fp-fNS"/>
                             <constraint firstItem="jLV-kW-OId" firstAttribute="leading" secondItem="yak-1j-X55" secondAttribute="leading" constant="16" id="meL-ap-Fdp"/>
+                            <constraint firstItem="lhL-r3-s3k" firstAttribute="leading" relation="lessThanOrEqual" secondItem="PdQ-lG-7HG" secondAttribute="trailing" constant="153.5" id="sSh-ZP-Bce"/>
                             <constraint firstItem="0DS-Hm-KhW" firstAttribute="leading" secondItem="yak-1j-X55" secondAttribute="leading" constant="16" id="stY-5T-BMh"/>
                             <constraint firstItem="TyL-pa-3y1" firstAttribute="leading" secondItem="yak-1j-X55" secondAttribute="leading" constant="16" id="vBQ-dS-HdQ"/>
                             <constraint firstItem="yak-1j-X55" firstAttribute="trailing" secondItem="0DS-Hm-KhW" secondAttribute="trailing" constant="16" id="zUo-JS-qif"/>

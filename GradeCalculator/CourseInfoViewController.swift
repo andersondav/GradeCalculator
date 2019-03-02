@@ -20,70 +20,80 @@ class CourseInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+       
+        // if the courseIndex is in bounds
         if (courseIndex > -1) {
             let course = myCourses[courseIndex]
-            
+
+            // set grade label and credit hour field
             gradeLabel.text = percentGrade
-            
             creditHourField.text = String(course.credits)
             
-            var weightsString:String = ""
-            
-            for weight in course.weights {
-                
-                weightsString.append(contentsOf: "\(weight.key): ")
-                
-                let percentString = String(format: "%.1f", weight.value * 100.0)
-                
-                weightsString.append(contentsOf: "\(percentString)%\n")
-                
-            }
-            
-            weightsLabel.text = weightsString
+            // display the weights the course has
+            displayWeights()
             
         }
         
+        // save button is disabled by default
         navigationItem.rightBarButtonItem!.isEnabled = false
         
     }
     
-    @IBAction func exitKeyboard(_ sender: Any) {
-        view.endEditing(true)
-    }
-    
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        if let dest = segue.destination as? CoursePageViewController {
-            myCourses[courseIndex].credits = Int(creditHourField.text!)!
-            
-            let data = try? PropertyListEncoder().encode(myCourses)
-            
-            UserDefaults.standard.set(data, forKey: "myCourses")
-            
-            dest.myCourses = try! PropertyListDecoder().decode([Course].self, from: UserDefaults.standard.value(forKey: "myCourses") as! Data)
-//            dest.course = dest.myCourses[courseIndex]
+    // used to display the weights for the course user is viewing
+    func displayWeights() {
+        let course = myCourses[courseIndex]
+        var weightsString:String = ""
+        
+        for weight in course.weights {
+            weightsString.append(contentsOf: "\(weight.key): ")
+            let percentString = String(format: "%.1f", weight.value * 100.0)
+            weightsString.append(contentsOf: "\(percentString)%\n")
         }
         
-        
+        weightsLabel.text = weightsString
+    }
+    
+
+    // MARK - START NAVIGATION METHODS:
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? CoursePageViewController {
+            // edit the credit field of the course user is viewing
+            myCourses[courseIndex].credits = Int(creditHourField.text!)!
+            
+            // save the course array to user defaults
+            saveCourseArray()
+            
+            // give course page most recent course array
+            dest.myCourses = myCourses
+        }
+    }
+    
+    // used to save the course array to user defaults
+    func saveCourseArray() {
+        if let data = try? PropertyListEncoder().encode(myCourses) {
+             UserDefaults.standard.set(data, forKey: "myCourses")
+        }
     }
  
+    // called when the user edits a text field
     @IBAction func validateChange(_ sender: Any) {
         
+        // if the new credits number is a valid integer, allow saving
         if let newCredits = Int((creditHourField.text)!) {
-            
-            navigationItem.rightBarButtonItem!.isEnabled = true
-            
+            if (newCredits >= 0) {
+                navigationItem.rightBarButtonItem!.isEnabled = true
+            }
         } else {
             navigationItem.rightBarButtonItem!.isEnabled = false
         }
         
     }
+    
+    // used to exit keyboard when user taps off a text field
+    @IBAction func exitKeyboard(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
+    
     
 }
