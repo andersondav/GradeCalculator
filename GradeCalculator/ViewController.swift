@@ -18,23 +18,19 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        nameTextField.adjustsFontSizeToFitWidth = false
         
+        // text field setup
+        nameTextField.adjustsFontSizeToFitWidth = false
         var placeHolder = NSMutableAttributedString()
         let Name  = "e.g. John"
-        
-        // Set the Font
         placeHolder = NSMutableAttributedString(string:Name, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20.0, weight: .light)])
-        
-        // Set the color
         placeHolder.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.lightGray, range:NSRange(location:0,length:Name.count))
-        
-        // Add attribute
         nameTextField.attributedPlaceholder = placeHolder
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        //see if user has logged in with name before, and send them to main screen if done
         if let username = UserDefaults.standard.object(forKey: "username") as? String {
             if (username == "") {
                 print("empty string")
@@ -43,12 +39,15 @@ class ViewController: UIViewController {
             }
             
         }
+        
     }
 
     @IBAction func exitKeyboard(_ sender: Any) {
+        // exits keyboard when user taps off a text field
         view.endEditing(true)
     }
     
+    // check that name is valid
     @IBAction func checkValidName(_ sender: Any) {
         
         if let name = nameTextField.text {
@@ -56,7 +55,7 @@ class ViewController: UIViewController {
                 errorLabel.text = "Name must not include spaces."
                 errorLabel.textColor = UIColor.red
                 startButton.isEnabled = false
-            } else if (name == "") {
+            } else if (name.isEmpty) {
                 errorLabel.text = "Please input a valid name."
                 errorLabel.textColor = UIColor.red
                 startButton.isEnabled = false
@@ -72,23 +71,12 @@ class ViewController: UIViewController {
         
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "setUpSegue" {
-//            if let dest = segue.destination as? HomeScreenViewController {
-//                //dest.username = username
-//                UserDefaults.standard.set(self.username , forKey: "username")
-//            }
-//        }
-//    }
-    
     @IBAction func login(_ sender: Any) {
         
+        // when pressing start button, save the username and an empty course array
         UserDefaults.standard.set(self.username, forKey: "username")
-        
-        var courses:[Course] = []
-        
+        let courses:[Course] = []
         UserDefaults.standard.set(courses, forKey: "myCourses")
-        
         self.performSegue(withIdentifier: "setUpSegue", sender: self)
         
     }
