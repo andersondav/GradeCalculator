@@ -13,6 +13,7 @@ class CourseInfoViewController: UIViewController {
     @IBOutlet weak var gradeLabel: UILabel!
     @IBOutlet weak var creditHourField: UITextField!
     @IBOutlet weak var weightsLabel: UILabel!
+    @IBOutlet weak var nameField: UITextField!
     
     var myCourses = [Course]()
     var courseIndex:Int = -1
@@ -26,6 +27,7 @@ class CourseInfoViewController: UIViewController {
             let course = myCourses[courseIndex]
 
             // set grade label and credit hour field
+            nameField.text = course.name
             gradeLabel.text = percentGrade
             creditHourField.text = String(course.credits)
             
@@ -57,14 +59,18 @@ class CourseInfoViewController: UIViewController {
     // MARK - START NAVIGATION METHODS:
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? CoursePageViewController {
-            // edit the credit field of the course user is viewing
+            // edit the credit and name fields of the course user is viewing
             myCourses[courseIndex].credits = Int(creditHourField.text!)!
+            myCourses[courseIndex].name = nameField.text!
             
             // save the course array to user defaults
             saveCourseArray()
             
             // give course page most recent course array
             dest.myCourses = myCourses
+            
+            //reset title of course page
+            dest.title = nameField.text!
         }
     }
     
@@ -79,13 +85,15 @@ class CourseInfoViewController: UIViewController {
     @IBAction func validateChange(_ sender: Any) {
         
         // if the new credits number is a valid integer, allow saving
-        if let newCredits = Int((creditHourField.text)!) {
-            if (newCredits >= 0) {
+        if let newCredits = Int((creditHourField.text)!), let name = nameField.text {
+            if (newCredits >= 0) && !(name.isEmpty) {
                 navigationItem.rightBarButtonItem!.isEnabled = true
+                return
             }
-        } else {
-            navigationItem.rightBarButtonItem!.isEnabled = false
         }
+        
+        navigationItem.rightBarButtonItem!.isEnabled = false
+        
         
     }
     

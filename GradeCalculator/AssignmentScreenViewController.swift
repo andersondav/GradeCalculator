@@ -17,6 +17,7 @@ class AssignmentScreenViewController: UIViewController, UIPickerViewDelegate, UI
     @IBOutlet weak var outOfTextField: UITextField!
     @IBOutlet weak var scoreTextField: UITextField!
     @IBOutlet weak var categoryPicker: UIPickerView!
+    @IBOutlet weak var nameTextField: UITextField!
     
 
     override func viewDidLoad() {
@@ -24,9 +25,10 @@ class AssignmentScreenViewController: UIViewController, UIPickerViewDelegate, UI
 
         // set assignment's name and score/out of fields
         let assignment = myCourses[courseIndex].assignments[assignmentIndex]
-        self.title = assignment.name
+        self.title = "Assignment Info"
         scoreTextField.text = String(format: "%.1f", assignment.score)
         outOfTextField.text = String(format: "%.1f", assignment.max)
+        nameTextField.text = assignment.name
         
         // picker view setup
         categoryPicker.delegate = self
@@ -67,7 +69,7 @@ class AssignmentScreenViewController: UIViewController, UIPickerViewDelegate, UI
         
         // create a new assignment with the specified changes, and set it to the original assignment in the array
         let course = myCourses[courseIndex]
-        let newAssignment = Assignment(name: self.title!, type: Array(course.weights.keys)[categoryPicker.selectedRow(inComponent: 0)], score: Double(scoreTextField.text!)!, max: Double(outOfTextField.text!)!)
+        let newAssignment = Assignment(name: nameTextField.text!, type: Array(course.weights.keys)[categoryPicker.selectedRow(inComponent: 0)], score: Double(scoreTextField.text!)!, max: Double(outOfTextField.text!)!)
         myCourses[courseIndex].assignments[assignmentIndex] = newAssignment
         
         // save most recent course array to user defaults
@@ -107,8 +109,8 @@ class AssignmentScreenViewController: UIViewController, UIPickerViewDelegate, UI
     // called when the user edits either of the text fields
     @IBAction func changeVals(_ sender: Any) {
         // make sure the score and out of fields are legal values >= 0, or else user cannot save changes
-        if let score = Double(scoreTextField.text!), let outOf = Double(outOfTextField.text!) {
-            if score >= 0 && outOf >= 0 {
+        if let score = Double(scoreTextField.text!), let outOf = Double(outOfTextField.text!), let name = nameTextField.text {
+            if score >= 0 && outOf >= 0 && !(name.isEmpty) {
                 navigationItem.rightBarButtonItem!.isEnabled = true
                 return
             }

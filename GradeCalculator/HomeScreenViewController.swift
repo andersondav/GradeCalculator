@@ -259,8 +259,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         // called when user has added a new course or new assignments have been created
           // if new courses have been added, need to display on tableView,
           // and if new assignments, need to recalculate grades
-        print("reloading")
-        print(myCourses)
+//        print("reloading")
+//        print(myCourses)
         coursesTableView.reloadData()
     }
     

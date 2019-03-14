@@ -47,6 +47,7 @@ class ViewController: UIViewController {
         view.endEditing(true)
     }
     
+    // check that name is valid
     @IBAction func checkValidName(_ sender: Any) {
         
         if let name = nameTextField.text {
