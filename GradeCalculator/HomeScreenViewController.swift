@@ -64,7 +64,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 dest.courseName = (sendingCell?.courseNameLabel.text)!
                 dest.percentGrade = (sendingCell?.percentageLabel.text)!
 
-                var row = findCourseInArray(courseName: (sendingCell?.courseNameLabel.text)!)
+                let row = findCourseInArray(courseName: (sendingCell?.courseNameLabel.text)!)
                 if (row >= 0) {
                     dest.index = row
                 } else {

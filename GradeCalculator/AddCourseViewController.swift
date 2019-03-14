@@ -184,7 +184,7 @@ class AddCourseViewController: UIViewController {
             var weightsString = ""
             
             for key in weights.keys {
-                var percentage = String(format: "%.1f", weights[key]! * 100.0)
+                let percentage = String(format: "%.1f", weights[key]! * 100.0)
                 weightsString += "\(key) - \(percentage)%   "
             }
             

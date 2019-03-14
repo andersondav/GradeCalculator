@@ -94,6 +94,4 @@ class CourseInfoViewController: UIViewController {
         view.endEditing(true)
     }
     
-    
-    
 }
